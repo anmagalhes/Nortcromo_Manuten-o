@@ -15,7 +15,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import Button from '@mui/material/Button';
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 function App() {
   return (
@@ -46,7 +46,6 @@ function App() {
         <Box sx={{ overflow: 'auto' }}>
           <List>
             {/* <img src='./north_cromo.png' width={220} height={215} /> */}
-
             <ListItem disablePadding>
               <ListItemButton>Ordem de Serviço</ListItemButton>
             </ListItem>
