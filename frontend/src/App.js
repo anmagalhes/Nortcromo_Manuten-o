@@ -16,6 +16,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import Button from '@mui/material/Button';
 import DataTable from './DataTable';
 import DataTable2 from './DataTable2';
+import DataTable3 from './DataTable3';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -73,14 +74,20 @@ function BtnLateral(props) {
         <ListItem disablePadding>
           <ListItemButton
             onClick={() => {
-              props.setRender('InicioOrdemDeServico');
+              props.setRender('ListaDeOS');
             }}
           >
             Ordem de Serviço
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton>Clientes</ListItemButton>
+          <ListItemButton
+            onClick={() => {
+              props.setRender('ListaDeClientes');
+            }}
+          >
+            Clientes
+          </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton>Setores</ListItemButton>
@@ -117,7 +124,7 @@ function Estrutura() {
           </Drawer>
         </Box>
       );
-    case 'InicioOrdemDeServico':
+    case 'ListaDeOS':
       return (
         <Box sx={{ display: 'flex' }}>
           <CssBaseline />
@@ -140,9 +147,12 @@ function Estrutura() {
             <Toolbar />
             <Grid container spacing={0.5} sx={{ mb: 1 }}>
               <Grid item xs={2}>
+                <Typography variant='h6' sx={{ mb: 1 }} noWrap component='div'>
+                  Ordem de Serviços
+                </Typography>
                 <Button
                   onClick={() => {
-                    setRender('NovaOS');
+                    setRender('FormDeOS');
                   }}
                 >
                   <AddCircleOutlineIcon />
@@ -183,7 +193,7 @@ function Estrutura() {
           </Box>
         </Box>
       );
-    case 'NovaOS':
+    case 'FormDeOS':
       return (
         <Box sx={{ display: 'flex' }}>
           <CssBaseline />
@@ -254,6 +264,57 @@ function Estrutura() {
           </Box>
         </Box>
       );
+    case 'ListaDeClientes':
+      return (
+        <Box sx={{ display: 'flex' }}>
+          <CssBaseline />
+          <MyAppBar setRender={setRender} />
+          <Drawer
+            variant='permanent'
+            sx={{
+              width: drawerWidth,
+              flexShrink: 0,
+              [`& .MuiDrawer-paper`]: {
+                width: drawerWidth,
+                boxSizing: 'border-box',
+              },
+            }}
+          >
+            <Toolbar />
+            <BtnLateral setRender={setRender} render={render} />
+          </Drawer>
+          <Box component='main' sx={{ flexGrow: 1, p: 3 }}>
+            <Toolbar />
+            <Typography variant='h6' sx={{ mb: 1 }} noWrap component='div'>
+              Clientes
+            </Typography>
+            <Grid container spacing={0.5} sx={{ mb: 1 }}>
+              <Grid item xs={2}>
+                <Button
+                  onClick={() => {
+                    setRender('FormDeCliente');
+                  }}
+                >
+                  <AddCircleOutlineIcon />
+                  Novo Cliente
+                </Button>
+              </Grid>
+              <Grid item xs={6}></Grid>
+            </Grid>
+            <Grid container spacing={0.5} sx={{ mb: 1 }}>
+              <Grid item xs={11}>
+                <TextField fullWidth label='Pesquisar' variant='outlined' />
+              </Grid>
+              <Grid item xs={1}>
+                <Button sx={{ width: 1, height: 1 }} variant='outlined'>
+                  <SearchIcon fontSize='large' />
+                </Button>
+              </Grid>
+            </Grid>
+            <DataTable3 />
+          </Box>
+        </Box>
+      );
   }
 }
 
@@ -265,104 +326,4 @@ function MyTextField(props) {
   );
 }
 
-function Inicio(props) {
-  return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <AppBar
-        position='fixed'
-        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
-      >
-        <Toolbar>
-          <Typography variant='h6' noWrap component='div'>
-            Sistema de Controle Interno
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        variant='permanent'
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          [`& .MuiDrawer-paper`]: {
-            width: drawerWidth,
-            boxSizing: 'border-box',
-          },
-        }}
-      >
-        <Toolbar />
-        <Box sx={{ overflow: 'auto' }}>
-          <List>
-            <ListItem disablePadding>
-              <ListItemButton
-                onClick={() => {
-                  props.setRender('InicioOrdemDeServico');
-                  // navigate('/InicioOrdemDeServico');
-                }}
-              >
-                Ordem de Serviço
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding>
-              <ListItemButton>Clientes</ListItemButton>
-            </ListItem>
-            <ListItem disablePadding>
-              <ListItemButton>Setores</ListItemButton>
-            </ListItem>
-          </List>
-        </Box>
-      </Drawer>
-    </Box>
-  );
-}
-
-function InicioOrdemDeServico(props) {
-  const navigate = useNavigate();
-
-  return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <AppBar
-        position='fixed'
-        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
-      >
-        <Toolbar>
-          <Typography variant='h6' noWrap component='div'>
-            Sistema de Controle Interno
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        variant='permanent'
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          [`& .MuiDrawer-paper`]: {
-            width: drawerWidth,
-            boxSizing: 'border-box',
-          },
-        }}
-      >
-        <Toolbar />
-        <Box sx={{ overflow: 'auto' }}>
-          <List>
-            {/* <img src='./north_cromo.png' width={220} height={215} /> */}
-            <ListItem disablePadding>
-              <ListItemButton>Ordem de Serviço</ListItemButton>
-            </ListItem>
-            <ListItem disablePadding>
-              <ListItemButton>Clientes</ListItemButton>
-            </ListItem>
-            <ListItem disablePadding>
-              <ListItemButton>Setores</ListItemButton>
-            </ListItem>
-          </List>
-        </Box>
-      </Drawer>
-      <Box component='main' sx={{ flexGrow: 1, p: 3 }}>
-        <Toolbar />
-      </Box>
-    </Box>
-  );
-}
 export default App;
