@@ -15,6 +15,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import Button from '@mui/material/Button';
 import DataTable from './DataTable';
+import DataTable2 from './DataTable2';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -37,20 +38,27 @@ import {
   Navigate,
 } from 'react-router-dom';
 
-const drawerWidth = 100;
+const drawerWidth = 150;
 
 function App() {
   return <Estrutura />;
 }
 
-function MyAppBar() {
+function MyAppBar(props) {
   return (
     <AppBar
       position='fixed'
       sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
     >
       <Toolbar>
-        <Typography variant='h6' noWrap component='div'>
+        <Typography
+          variant='h6'
+          noWrap
+          component='div'
+          onClick={() => {
+            props.setRender('Inicio');
+          }}
+        >
           Sistema de Controle Interno
         </Typography>
       </Toolbar>
@@ -92,7 +100,7 @@ function Estrutura() {
       return (
         <Box sx={{ display: 'flex' }}>
           <CssBaseline />
-          <MyAppBar />
+          <MyAppBar setRender={setRender} />
           <Drawer
             variant='permanent'
             sx={{
@@ -104,8 +112,8 @@ function Estrutura() {
               },
             }}
           >
-            <BtnLateral setRender={setRender} render={render} />
             <Toolbar />
+            <BtnLateral setRender={setRender} render={render} />
           </Drawer>
         </Box>
       );
@@ -113,7 +121,7 @@ function Estrutura() {
       return (
         <Box sx={{ display: 'flex' }}>
           <CssBaseline />
-          <MyAppBar />
+          <MyAppBar setRender={setRender} />
           <Drawer
             variant='permanent'
             sx={{
@@ -179,7 +187,7 @@ function Estrutura() {
       return (
         <Box sx={{ display: 'flex' }}>
           <CssBaseline />
-          <MyAppBar />
+          <MyAppBar setRender={setRender} />
           <Drawer
             variant='permanent'
             sx={{
@@ -239,7 +247,7 @@ function Estrutura() {
               </Grid>
             </Paper>
             <Paper elevation={3} sx={{ m: 0, p: 1 }}>
-              <DataTable />
+              <DataTable2 />
 
               {/* <Grid container spacing={1}></Grid> */}
             </Paper>
