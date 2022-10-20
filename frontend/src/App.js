@@ -14,6 +14,15 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import Button from '@mui/material/Button';
+import DataTable from './DataTable';
+import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import SearchIcon from '@mui/icons-material/Search';
 
 const drawerWidth = 200;
 
@@ -60,6 +69,44 @@ function App() {
       </Drawer>
       <Box component='main' sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
+        <Grid container spacing={0.5} sx={{ mb: 1 }}>
+          <Grid item xs={2}>
+            <Button>
+              <AddCircleOutlineIcon />
+              Nova OS
+            </Button>
+          </Grid>
+          <Grid item xs={6}></Grid>
+          <Grid item xs={2}>
+            <TextField label='Data Inicio' variant='outlined' />
+          </Grid>
+          <Grid item xs={2}>
+            <TextField label='Data Fim' variant='outlined' />
+          </Grid>
+        </Grid>
+        <Grid container spacing={0.5} sx={{ mb: 1 }}>
+          <Grid item xs={2}>
+            <FormControl fullWidth>
+              <InputLabel id='demo-simple-select-label'>
+                Status da OS
+              </InputLabel>
+              <Select value={''} label='Status da OS'>
+                <MenuItem value={10}>Ten</MenuItem>
+                <MenuItem value={20}>Twenty</MenuItem>
+                <MenuItem value={30}>Thirty</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={9}>
+            <TextField fullWidth label='Pesquisar' variant='outlined' />
+          </Grid>
+          <Grid item xs={1}>
+            <Button sx={{ width: 1, height: 1 }} variant='outlined'>
+              <SearchIcon fontSize='large' />
+            </Button>
+          </Grid>
+        </Grid>
+        <DataTable />
       </Box>
     </Box>
   );
