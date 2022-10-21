@@ -93,7 +93,11 @@ function BtnLateral(props) {
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton>
+          <ListItemButton
+            onClick={() => {
+              alert('esta parte ainda não foi programada');
+            }}
+          >
             <FactoryOutlinedIcon />
             Setores
           </ListItemButton>
@@ -220,8 +224,27 @@ function Estrutura() {
           </Drawer>
           <Box component='main' sx={{ flexGrow: 1, p: 3 }}>
             <Toolbar />
+            <Typography variant='h6' sx={{ mb: 1 }} noWrap component='div'>
+              Cadastro de Ordem Serviço
+            </Typography>
             <Paper elevation={3} sx={{ mb: 1, p: 1 }}>
               <Grid container spacing={2}>
+                <Grid item xs={2}>
+                  <Button
+                    variant='outlined'
+                    onClick={() => {
+                      setRender('ListaDeOS');
+                    }}
+                  >
+                    Voltar
+                  </Button>
+                </Grid>
+                <Grid item xs={8}></Grid>
+                <Grid item xs={2}>
+                  <Grid container justifyContent='flex-end'>
+                    <Button variant='outlined'>Salvar</Button>
+                  </Grid>
+                </Grid>
                 <MyTextField xs={2} label={'O.S.'} />
                 <MyTextField xs={2} label={'Data Recebimento'} />
                 <MyTextField xs={2} label={'NF Entrada'} />
@@ -262,7 +285,7 @@ function Estrutura() {
                 </Grid>
               </Grid>
             </Paper>
-            <Paper elevation={3} sx={{ m: 0, p: 1 }}>
+            <Paper elevation={3} sx={{ mb: 1, p: 1 }}>
               <DataTable2 />
 
               {/* <Grid container spacing={1}></Grid> */}
@@ -342,52 +365,49 @@ function Estrutura() {
           </Drawer>
           <Box component='main' sx={{ flexGrow: 1, p: 3 }}>
             <Toolbar />
+            <Typography variant='h6' sx={{ mb: 1 }} noWrap component='div'>
+              Cadastro de Cliente
+            </Typography>
             <Paper elevation={3} sx={{ mb: 1, p: 1 }}>
               <Grid container spacing={2}>
-                <MyTextField xs={2} label={'O.S.'} />
-                <MyTextField xs={2} label={'Data Recebimento'} />
-                <MyTextField xs={2} label={'NF Entrada'} />
-                <MyTextField xs={6} label={'Vendedor'} />
-                <MyTextField xs={4} label={'CNPJ'} />
-                <MyTextField xs={8} label={'Cliente'} />
-              </Grid>
-            </Paper>
-            <Paper elevation={3} sx={{ mb: 1, p: 1 }}>
-              <Grid container spacing={2}>
-                <MyTextField xs={1} label={'Código'} />
-                <MyTextField xs={5} label={'Descrição do Produto'} />
-                <MyTextField xs={1} label={'Qtd'} />
-                <MyTextField xs={3} label={'Referência do Produto'} />
                 <Grid item xs={2}>
-                  <FormGroup>
-                    <FormControlLabel
-                      control={<Checkbox defaultChecked />}
-                      label='Necessário Demonstar?'
-                    />
-                  </FormGroup>
+                  <FormControl fullWidth>
+                    <InputLabel>Tipo</InputLabel>
+                    <Select label='Tipo'>
+                      <MenuItem value={'FÍSICA'}>FÍSICA</MenuItem>
+                      <MenuItem value={'JURÍDICA'}>JURÍDICA</MenuItem>
+                    </Select>
+                  </FormControl>
                 </Grid>
-                <MyTextField xs={3} label={'Origem'} />
-                <MyTextField xs={3} label={'Acionamento'} />
-                <MyTextField xs={3} label={'Cor'} />
-                <MyTextField xs={3} label={'Curso'} />
-                <MyTextField xs={2} label={'Pressão do Trabalho'} />
-                <MyTextField xs={2} label={'Posição do Trabalho'} />
-                <MyTextField xs={8} label={'Queixa do Cliente'} />
-                <MyTextField xs={2.5} label={'Imagem1'} />
-                <MyTextField xs={2.5} label={'Imagem2'} />
-                <MyTextField xs={2.5} label={'Imagem3'} />
-                <MyTextField xs={2.5} label={'Imagem4'} />
+                <MyTextField xs={10} label={'Razão Social'} />
+                <MyTextField xs={3} label={'CNPJ'} />
+                <MyTextField xs={3} label={'DDD + WhatsApp'} />
+                <MyTextField xs={3} label={'DDD + Fone'} />
+                <MyTextField xs={3} label={'Fone Recado'} />
+                <MyTextField xs={2} label={'CEP'} />
+                <MyTextField xs={10} label={'Logradouro'} />
+                <MyTextField xs={2} label={'Número'} />
+                <MyTextField xs={4} label={'Bairro'} />
+                <MyTextField xs={5} label={'Cidade'} />
+                <MyTextField xs={1} label={'UF'} />
+                <MyTextField xs={12} label={'Complemento'} />
                 <Grid item xs={2}>
-                  <Button sx={{ height: 1, width: 1 }}>
-                    <AddCircleOutlineIcon />
+                  <Button
+                    variant='outlined'
+                    onClick={() => {
+                      setRender('ListaDeClientes');
+                    }}
+                  >
+                    Voltar
                   </Button>
                 </Grid>
+                <Grid item xs={8}></Grid>
+                <Grid item xs={2}>
+                  <Grid container justifyContent='flex-end'>
+                    <Button variant='outlined'>Salvar</Button>
+                  </Grid>
+                </Grid>
               </Grid>
-            </Paper>
-            <Paper elevation={3} sx={{ m: 0, p: 1 }}>
-              <DataTable2 />
-
-              {/* <Grid container spacing={1}></Grid> */}
             </Paper>
           </Box>
         </Box>
