@@ -28,8 +28,12 @@ import SearchIcon from '@mui/icons-material/Search';
 import { useState, useEffect, useContext } from 'react';
 import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
+import FactoryOutlinedIcon from '@mui/icons-material/FactoryOutlined';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import HomeIcon from '@mui/icons-material/Home';
+import BuildIcon from '@mui/icons-material/BuildOutlined';
+import BadgeOutlinedIcon from '@mui/icons-material/BadgeOutlined';
 import {
   Routes,
   Route,
@@ -39,7 +43,7 @@ import {
   Navigate,
 } from 'react-router-dom';
 
-const drawerWidth = 150;
+const drawerWidth = 200;
 
 function App() {
   return <Estrutura />;
@@ -52,14 +56,13 @@ function MyAppBar(props) {
       sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
     >
       <Toolbar>
-        <Typography
-          variant='h6'
-          noWrap
-          component='div'
+        <HomeIcon
           onClick={() => {
             props.setRender('Inicio');
           }}
-        >
+          sx={{ cursor: 'pointer' }}
+        />
+        <Typography variant='h6' noWrap component='div' sx={{ ml: 1 }}>
           Sistema de Controle Interno
         </Typography>
       </Toolbar>
@@ -77,7 +80,7 @@ function BtnLateral(props) {
               props.setRender('ListaDeOS');
             }}
           >
-            Ordem de Serviço
+            <BuildIcon fontSize='small' /> Ordem de Serviço
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
@@ -86,11 +89,14 @@ function BtnLateral(props) {
               props.setRender('ListaDeClientes');
             }}
           >
-            Clientes
+            <BadgeOutlinedIcon /> Clientes
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton>Setores</ListItemButton>
+          <ListItemButton>
+            <FactoryOutlinedIcon />
+            Setores
+          </ListItemButton>
         </ListItem>
       </List>
     </Box>
@@ -146,7 +152,7 @@ function Estrutura() {
           <Box component='main' sx={{ flexGrow: 1, p: 3 }}>
             <Toolbar />
             <Grid container spacing={0.5} sx={{ mb: 1 }}>
-              <Grid item xs={2}>
+              <Grid item xs={3}>
                 <Typography variant='h6' sx={{ mb: 1 }} noWrap component='div'>
                   Ordem de Serviços
                 </Typography>
@@ -159,7 +165,7 @@ function Estrutura() {
                   Nova OS
                 </Button>
               </Grid>
-              <Grid item xs={6}></Grid>
+              <Grid item xs={5}></Grid>
               <Grid item xs={2}>
                 <TextField label='Data Inicio' variant='outlined' />
               </Grid>
@@ -312,6 +318,77 @@ function Estrutura() {
               </Grid>
             </Grid>
             <DataTable3 />
+          </Box>
+        </Box>
+      );
+    case 'FormDeCliente':
+      return (
+        <Box sx={{ display: 'flex' }}>
+          <CssBaseline />
+          <MyAppBar setRender={setRender} />
+          <Drawer
+            variant='permanent'
+            sx={{
+              width: drawerWidth,
+              flexShrink: 0,
+              [`& .MuiDrawer-paper`]: {
+                width: drawerWidth,
+                boxSizing: 'border-box',
+              },
+            }}
+          >
+            <Toolbar />
+            <BtnLateral setRender={setRender} render={render} />
+          </Drawer>
+          <Box component='main' sx={{ flexGrow: 1, p: 3 }}>
+            <Toolbar />
+            <Paper elevation={3} sx={{ mb: 1, p: 1 }}>
+              <Grid container spacing={2}>
+                <MyTextField xs={2} label={'O.S.'} />
+                <MyTextField xs={2} label={'Data Recebimento'} />
+                <MyTextField xs={2} label={'NF Entrada'} />
+                <MyTextField xs={6} label={'Vendedor'} />
+                <MyTextField xs={4} label={'CNPJ'} />
+                <MyTextField xs={8} label={'Cliente'} />
+              </Grid>
+            </Paper>
+            <Paper elevation={3} sx={{ mb: 1, p: 1 }}>
+              <Grid container spacing={2}>
+                <MyTextField xs={1} label={'Código'} />
+                <MyTextField xs={5} label={'Descrição do Produto'} />
+                <MyTextField xs={1} label={'Qtd'} />
+                <MyTextField xs={3} label={'Referência do Produto'} />
+                <Grid item xs={2}>
+                  <FormGroup>
+                    <FormControlLabel
+                      control={<Checkbox defaultChecked />}
+                      label='Necessário Demonstar?'
+                    />
+                  </FormGroup>
+                </Grid>
+                <MyTextField xs={3} label={'Origem'} />
+                <MyTextField xs={3} label={'Acionamento'} />
+                <MyTextField xs={3} label={'Cor'} />
+                <MyTextField xs={3} label={'Curso'} />
+                <MyTextField xs={2} label={'Pressão do Trabalho'} />
+                <MyTextField xs={2} label={'Posição do Trabalho'} />
+                <MyTextField xs={8} label={'Queixa do Cliente'} />
+                <MyTextField xs={2.5} label={'Imagem1'} />
+                <MyTextField xs={2.5} label={'Imagem2'} />
+                <MyTextField xs={2.5} label={'Imagem3'} />
+                <MyTextField xs={2.5} label={'Imagem4'} />
+                <Grid item xs={2}>
+                  <Button sx={{ height: 1, width: 1 }}>
+                    <AddCircleOutlineIcon />
+                  </Button>
+                </Grid>
+              </Grid>
+            </Paper>
+            <Paper elevation={3} sx={{ m: 0, p: 1 }}>
+              <DataTable2 />
+
+              {/* <Grid container spacing={1}></Grid> */}
+            </Paper>
           </Box>
         </Box>
       );
