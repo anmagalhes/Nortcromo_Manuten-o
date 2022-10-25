@@ -103,9 +103,7 @@ function BtnLateral(props) {
 }
 
 function Estrutura() {
-  const navigate = useNavigate();
   const [render, setRender] = useState('Inicio');
-  const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
   switch (render) {
     case 'Inicio':
