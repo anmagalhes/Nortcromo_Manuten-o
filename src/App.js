@@ -10,6 +10,7 @@ import DataTable from './DataTable';
 import DataTable2 from './DataTable2';
 import MyTextField from './MyTextField';
 import FormDeCliente from './FormDeCliente';
+import Context from './multiuso/Context';
 import TabelaDeClientes from './TabelaDeClientes';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
@@ -26,11 +27,90 @@ import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
 import MyAppBar from './MyAppBar';
 import BtnLateral from './BtnLateral';
+import { PropaneSharp } from '@mui/icons-material';
 
 const drawerWidth = 200;
 
 function App() {
   const [render, setRender] = useState('ListaDeClientes');
+  const initialState = {
+    id_cliente: '',
+    tipo_cliente: '',
+    razao_social_cliente: '',
+    cnpj_cliente: '',
+    whatsapp_cliente: '',
+    fone_cliente: '',
+    fone_recado_cliente: '',
+    CEP_cliente: '',
+    logradouro_cliente: '',
+    numero_cliente: '',
+    bairro_cliente: '',
+    cidade_cliente: '',
+    uf_cliente: '',
+    complemento_cliente: '',
+  };
+  const [dados, setDados] = useState(initialState);
+
+  const handleChange = (event) => {
+    const value = event.target.value;
+
+    setDados((prevState) => {
+      return {
+        ...prevState,
+        [event.target.name]: value,
+      };
+    });
+  };
+
+  function lancarNoBanco(rotaPInserir) {
+    fetch('http://127.0.0.1:5000/' + rotaPInserir, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        oQueLancar: dados,
+      }),
+    })
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          alert('sucesso');
+        },
+        (error) => {
+          alert(error);
+          console.log(error);
+        }
+      );
+  }
+
+  return (
+    <Context.Provider
+      value={[
+        dados,
+        setDados,
+        handleChange,
+        render,
+        setRender,
+        lancarNoBanco,
+        initialState,
+      ]}
+    >
+      <Estrutura />
+    </Context.Provider>
+  );
+}
+
+function Estrutura() {
+  const [
+    dados,
+    setDados,
+    handleChange,
+    render,
+    setRender,
+    lancarNoBanco,
+    initialState,
+  ] = useContext(Context);
 
   switch (render) {
     case 'Inicio':
@@ -241,6 +321,7 @@ function App() {
               <Grid item xs={2}>
                 <Button
                   onClick={() => {
+                    setDados(initialState);
                     setRender('FormDeCliente');
                   }}
                 >
