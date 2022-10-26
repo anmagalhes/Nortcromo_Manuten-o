@@ -28,16 +28,6 @@ export default function BtnLateral(props) {
             <BadgeOutlinedIcon /> Clientes
           </ListItemButton>
         </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton
-            onClick={() => {
-              alert('esta parte ainda não foi programada');
-            }}
-          >
-            <FactoryOutlinedIcon />
-            Setores
-          </ListItemButton>
-        </ListItem>
       </List>
     </Box>
   );

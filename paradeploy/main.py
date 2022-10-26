@@ -30,7 +30,7 @@ def before_request_callback():
 @app.route("/inserirCliente", methods=['POST'])
 def inserirCliente():
     oQueLancar = request.json['oQueLancar']
-
+    print(oQueLancar)
     if(oQueLancar['id_cliente'] == ''):
         query = """
         INSERT INTO
@@ -94,7 +94,6 @@ def inserirCliente():
     g.connection.commit()
     return jsonify(oQueLancar=oQueLancar)
 
-
 @app.route("/lerClientes", methods=['POST'])
 def lerClientes():
     g.cur.execute(""" SELECT
@@ -147,3 +146,5 @@ def lerLinhaClientes():
         results.append(row_dict)
 
     return jsonify(dados=results)
+
+app.run()
