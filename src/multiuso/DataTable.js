@@ -6,8 +6,16 @@ import Context from './Context';
 
 export default function DataTable(props) {
   const columns = props.columns;
-  const navigate = useNavigate();
-  const [dados, setDados, render, setRender] = useContext(Context);
+  const [
+    dados,
+    setDados,
+    handleChange,
+    render,
+    setRender,
+    lancarNoBanco,
+    initialState,
+    handleChangeComMask,
+  ] = useContext(Context);
   const [rows, setRows] = useState([]);
   const [isLoading, setLoading] = useState(true);
 

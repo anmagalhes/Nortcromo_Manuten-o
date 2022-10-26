@@ -21,6 +21,7 @@ export default function DataTable() {
     setRender,
     lancarNoBanco,
     initialState,
+    handleChangeComMask,
   ] = useContext(Context);
 
   useEffect(() => {

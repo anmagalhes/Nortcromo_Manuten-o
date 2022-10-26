@@ -12,19 +12,36 @@ export default function MyTextField(props) {
     setRender,
     lancarNoBanco,
     initialState,
+    handleChangeComMask,
   ] = useContext(Context);
 
-  return (
-    <Grid item xs={props.xs}>
-      <TextField
-        label={props.label}
-        variant='outlined'
-        name={props.name}
-        disabled={props.disabled}
-        onChange={handleChange}
-        value={props.value}
-        fullWidth
-      />
-    </Grid>
-  );
+  if (props.maskY) {
+    return (
+      <Grid item xs={props.xs}>
+        <TextField
+          label={props.label}
+          variant='outlined'
+          name={props.name}
+          disabled={props.disabled}
+          onChange={handleChangeComMask}
+          value={props.value}
+          fullWidth
+        />
+      </Grid>
+    );
+  } else {
+    return (
+      <Grid item xs={props.xs}>
+        <TextField
+          label={props.label}
+          variant='outlined'
+          name={props.name}
+          disabled={props.disabled}
+          onChange={handleChange}
+          value={props.value}
+          fullWidth
+        />
+      </Grid>
+    );
+  }
 }

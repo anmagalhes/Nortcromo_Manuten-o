@@ -27,6 +27,7 @@ export default function FormDeCliente(props) {
     setRender,
     lancarNoBanco,
     initialState,
+    handleChangeComMask,
   ] = useContext(Context);
   const drawerWidth = 200;
 
@@ -87,6 +88,7 @@ export default function FormDeCliente(props) {
               name='cnpj_cliente'
               value={dados.cnpj_cliente}
               label={'CNPJ'}
+              maskY={true}
             />
             <MyTextField
               xs={3}

@@ -28,6 +28,7 @@ import FormGroup from '@mui/material/FormGroup';
 import MyAppBar from './MyAppBar';
 import BtnLateral from './BtnLateral';
 import { PropaneSharp } from '@mui/icons-material';
+import { mask } from './multiuso/mask.js';
 
 const drawerWidth = 200;
 
@@ -58,6 +59,17 @@ function App() {
       return {
         ...prevState,
         [event.target.name]: value,
+      };
+    });
+  };
+
+  const handleChangeComMask = (event) => {
+    const value = event.target.value;
+
+    setDados((prevState) => {
+      return {
+        ...prevState,
+        [event.target.name]: mask(value),
       };
     });
   };
@@ -94,6 +106,7 @@ function App() {
         setRender,
         lancarNoBanco,
         initialState,
+        handleChangeComMask,
       ]}
     >
       <Estrutura />
@@ -110,6 +123,7 @@ function Estrutura() {
     setRender,
     lancarNoBanco,
     initialState,
+    handleChangeComMask,
   ] = useContext(Context);
 
   switch (render) {
