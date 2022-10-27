@@ -261,3 +261,5 @@ def lerLinhaServicos():
     results = transformaEmDict(g.cur.fetchall(), list(g.cur.description))
 
     return jsonify(dados=results)
+
+app.run()
