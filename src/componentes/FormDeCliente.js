@@ -1,8 +1,8 @@
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
-import MyAppBar from '../MyAppBar';
-import BtnLateral from '../BtnLateral';
-import MyTextField from '../MyTextField';
+import MyAppBar from '../multiuso/MyAppBar';
+import BtnLateral from '../multiuso/BtnLateral';
+import MyTextField from '../multiuso/MyTextField';
 import Grid from '@mui/material/Grid';
 import Drawer from '@mui/material/Drawer';
 import MenuItem from '@mui/material/MenuItem';
@@ -36,7 +36,7 @@ export default function FormDeCliente(props) {
       <MyAppBar setRender={props.setRender} />
       <Drawer variant='permanent' sx={drawerStyle}>
         <Toolbar />
-        <BtnLateral setRender={props.setRender} render={props.render} />
+        <BtnLateral />
       </Drawer>
       <Box component='main' sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />

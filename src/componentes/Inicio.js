@@ -2,11 +2,11 @@ import { drawerStyle } from '../stylejs/drawer';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import { useState, useEffect, useContext } from 'react';
-import MyAppBar from '../MyAppBar';
+import MyAppBar from '../multiuso/MyAppBar';
 import Context from '../multiuso/Context';
 import Drawer from '@mui/material/Drawer';
 import Toolbar from '@mui/material/Toolbar';
-import BtnLateral from '../BtnLateral';
+import BtnLateral from '../multiuso/BtnLateral';
 
 export default function () {
   const [

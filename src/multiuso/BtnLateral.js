@@ -5,24 +5,28 @@ import ListItemButton from '@mui/material/ListItemButton';
 import BuildIcon from '@mui/icons-material/BuildOutlined';
 import FactoryOutlinedIcon from '@mui/icons-material/FactoryOutlined';
 import BadgeOutlinedIcon from '@mui/icons-material/BadgeOutlined';
+import { useState, useEffect, useContext } from 'react';
+import Context from '../multiuso/Context';
 
-export default function BtnLateral(props) {
+export default function BtnLateral() {
+  const [
+    dados,
+    setDados,
+    handleChange,
+    render,
+    setRender,
+    lancarNoBanco,
+    initialState,
+    handleChangeComMask,
+  ] = useContext(Context);
+
   return (
     <Box sx={{ overflow: 'auto' }}>
       <List>
         <ListItem disablePadding>
           <ListItemButton
             onClick={() => {
-              props.setRender('ListaDeOS');
-            }}
-          >
-            <BuildIcon fontSize='small' /> Ordem de Serviço
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton
-            onClick={() => {
-              props.setRender('ListaDeClientes');
+              setRender('ListaDeClientes');
             }}
           >
             <BadgeOutlinedIcon /> Clientes

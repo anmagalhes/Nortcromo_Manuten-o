@@ -100,11 +100,11 @@ function Estrutura() {
 
   switch (render) {
     case 'Inicio':
-      return <Inicio setRender={setRender} />;
+      return <Inicio />;
     case 'ListaDeClientes':
-      return <ListaDeClientes setRender={setRender} />;
+      return <ListaDeClientes />;
     case 'FormDeCliente':
-      return <FormDeCliente setRender={setRender} />;
+      return <FormDeCliente />;
   }
 }
 

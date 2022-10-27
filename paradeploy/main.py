@@ -3,6 +3,15 @@ from sqlalchemy import create_engine
 
 app = Flask("__main__")
 
+def transformaEmDict(dados, columns):
+    results = []
+    for row in dados:
+        row_dict = {}
+        for i, col in enumerate(columns):
+            row_dict[col.name] = row[i]
+        results.append(row_dict)
+    return results
+
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -30,7 +39,6 @@ def before_request_callback():
 @app.route("/inserirCliente", methods=['POST'])
 def inserirCliente():
     oQueLancar = request.json['oQueLancar']
-    print(oQueLancar)
     if(oQueLancar['id_cliente'] == ''):
         query = """
         INSERT INTO
@@ -102,16 +110,7 @@ def lerClientes():
         cnpj_cliente     
     FROM clientes
     """)
-    columns = list(g.cur.description)
-    dados = g.cur.fetchall()
-
-    results = []
-    for row in dados:
-        row_dict = {}
-        for i, col in enumerate(columns):
-            row_dict[col.name] = row[i]
-        results.append(row_dict)
-
+    results = transformaEmDict(g.cur.fetchall(), list(g.cur.description))
     return jsonify(dados=results)
 
 @app.route("/lerLinhaClientes", methods=['POST'])
@@ -135,14 +134,6 @@ def lerLinhaClientes():
         to_char(databr_cliente,'DD/MM/YYYY') as databr_cliente,
         to_char(horario_cliente, 'HH12:MI:SS') as horario_cliente
     FROM clientes WHERE id_cliente = """+oQueProcurar)
-    columns = list(g.cur.description)
-    dados = g.cur.fetchall()
-
-    results = []
-    for row in dados:
-        row_dict = {}
-        for i, col in enumerate(columns):
-            row_dict[col.name] = row[i]
-        results.append(row_dict)
+    results = transformaEmDict(g.cur.fetchall(), list(g.cur.description))
 
     return jsonify(dados=results)

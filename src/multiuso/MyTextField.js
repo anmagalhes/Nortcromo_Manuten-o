@@ -1,33 +1,47 @@
-import { useState, useEffect, useContext } from 'react';
-import TextField from '@mui/material/TextField';
-import Context from '../multiuso/Context';
 import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
+import Context from './Context';
+import { useState, useEffect, useContext } from 'react';
 
 export default function MyTextField(props) {
-  const [dados, setDados] = useContext(Context);
+  const [
+    dados,
+    setDados,
+    handleChange,
+    render,
+    setRender,
+    lancarNoBanco,
+    initialState,
+    handleChangeComMask,
+  ] = useContext(Context);
 
-  const handleChange = (event) => {
-    const value = event.target.value;
-
-    setDados((prevState) => {
-      return {
-        ...prevState,
-        [event.target.name]: value,
-      };
-    });
-  };
-
-  return (
-    <Grid item xs={props.xs}>
-      <TextField
-        disabled={props.permitido}
-        label={props.label}
-        name={props.name}
-        defaultValue={props.value}
-        onChange={handleChange}
-        variant='outlined'
-        fullWidth
-      />
-    </Grid>
-  );
+  if (props.maskY) {
+    return (
+      <Grid item xs={props.xs}>
+        <TextField
+          label={props.label}
+          variant='outlined'
+          name={props.name}
+          disabled={props.disabled}
+          onChange={handleChangeComMask}
+          value={props.value}
+          fullWidth
+        />
+      </Grid>
+    );
+  } else {
+    return (
+      <Grid item xs={props.xs}>
+        <TextField
+          label={props.label}
+          variant='outlined'
+          name={props.name}
+          disabled={props.disabled}
+          onChange={handleChange}
+          value={props.value}
+          fullWidth
+        />
+      </Grid>
+    );
+  }
 }
