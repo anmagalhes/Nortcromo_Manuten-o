@@ -2,7 +2,7 @@ import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import CreateIcon from '@mui/icons-material/Create';
 import { useState, useEffect, useContext } from 'react';
-import Context from './multiuso/Context';
+import Context from '../multiuso/Context';
 
 const columns = [
   { field: 'id', headerName: 'id', flex: 0.5 },

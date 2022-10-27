@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
-import TabelaDeClientes from '../TabelaDeClientes';
+import TabelaDeClientes from '../componentes/TabelaDeClientes';
 import SearchIcon from '@mui/icons-material/Search';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import InputLabel from '@mui/material/InputLabel';
@@ -50,7 +50,12 @@ export default function ListaDeClientes(props) {
         </Typography>
         <Grid container spacing={0.5} sx={{ mb: 1 }}>
           <Grid item xs={2}>
-            <Button>
+            <Button
+              onClick={() => {
+                setDados(initialState);
+                setRender('FormDeCliente');
+              }}
+            >
               <AddCircleOutlineIcon />
               Novo Cliente
             </Button>
