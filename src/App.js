@@ -9,7 +9,8 @@ import Button from '@mui/material/Button';
 import DataTable from './DataTable';
 import DataTable2 from './DataTable2';
 import MyTextField from './MyTextField';
-import FormDeCliente from './FormDeCliente';
+import FormDeCliente from './componentes/FormDeCliente';
+import ListaDeClientes from './componentes/ListaDeClientes';
 import Context from './multiuso/Context';
 import TabelaDeClientes from './TabelaDeClientes';
 import Grid from '@mui/material/Grid';
@@ -33,7 +34,7 @@ import { mask } from './multiuso/mask.js';
 const drawerWidth = 200;
 
 function App() {
-  const [render, setRender] = useState('ListaDeClientes');
+  const [render, setRender] = useState('Inicio');
   const initialState = {
     id_cliente: '',
     tipo_cliente: '',
@@ -88,6 +89,7 @@ function App() {
       .then(
         (result) => {
           alert('sucesso');
+          setRender('ListaDeClientes');
         },
         (error) => {
           alert(error);
@@ -128,26 +130,7 @@ function Estrutura() {
 
   switch (render) {
     case 'Inicio':
-      return (
-        <Box sx={{ display: 'flex' }}>
-          <CssBaseline />
-          <MyAppBar setRender={setRender} />
-          <Drawer
-            variant='permanent'
-            sx={{
-              width: drawerWidth,
-              flexShrink: 0,
-              [`& .MuiDrawer-paper`]: {
-                width: drawerWidth,
-                boxSizing: 'border-box',
-              },
-            }}
-          >
-            <Toolbar />
-            <BtnLateral setRender={setRender} render={render} />
-          </Drawer>
-        </Box>
-      );
+      return <div>123</div>;
     case 'ListaDeOS':
       return (
         <Box sx={{ display: 'flex' }}>
@@ -308,57 +291,7 @@ function Estrutura() {
         </Box>
       );
     case 'ListaDeClientes':
-      return (
-        <Box sx={{ display: 'flex' }}>
-          <CssBaseline />
-          <MyAppBar setRender={setRender} />
-          <Drawer
-            variant='permanent'
-            sx={{
-              width: drawerWidth,
-              flexShrink: 0,
-              [`& .MuiDrawer-paper`]: {
-                width: drawerWidth,
-                boxSizing: 'border-box',
-              },
-            }}
-          >
-            <Toolbar />
-            <BtnLateral setRender={setRender} render={render} />
-          </Drawer>
-          <Box component='main' sx={{ flexGrow: 1, p: 3 }}>
-            <Toolbar />
-            <Typography variant='h6' sx={{ mb: 1 }} noWrap component='div'>
-              Clientes
-            </Typography>
-            <Grid container spacing={0.5} sx={{ mb: 1 }}>
-              <Grid item xs={2}>
-                <Button
-                  onClick={() => {
-                    setDados(initialState);
-                    setRender('FormDeCliente');
-                  }}
-                >
-                  <AddCircleOutlineIcon />
-                  Novo Cliente
-                </Button>
-              </Grid>
-              <Grid item xs={6}></Grid>
-            </Grid>
-            <Grid container spacing={0.5} sx={{ mb: 1 }}>
-              <Grid item xs={11}>
-                <TextField fullWidth label='Pesquisar' variant='outlined' />
-              </Grid>
-              <Grid item xs={1}>
-                <Button sx={{ width: 1, height: 1 }} variant='outlined'>
-                  <SearchIcon fontSize='large' />
-                </Button>
-              </Grid>
-            </Grid>
-            <TabelaDeClientes />
-          </Box>
-        </Box>
-      );
+      return <ListaDeClientes setRender={setRender} />;
     case 'FormDeCliente':
       return <FormDeCliente setRender={setRender} />;
   }

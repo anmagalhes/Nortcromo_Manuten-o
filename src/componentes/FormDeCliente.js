@@ -1,8 +1,8 @@
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
-import MyAppBar from './MyAppBar';
-import BtnLateral from './BtnLateral';
-import MyTextField from './MyTextField';
+import MyAppBar from '../MyAppBar';
+import BtnLateral from '../BtnLateral';
+import MyTextField from '../MyTextField';
 import Grid from '@mui/material/Grid';
 import Drawer from '@mui/material/Drawer';
 import MenuItem from '@mui/material/MenuItem';
@@ -14,9 +14,10 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
-import MyDrawer from './MyDrawer';
+import MyDrawer from '../MyDrawer';
 import { useState, useEffect, useContext } from 'react';
-import Context from './multiuso/Context';
+import Context from '../multiuso/Context';
+import { drawerStyle } from '../stylejs/drawer';
 
 export default function FormDeCliente(props) {
   const [
@@ -29,16 +30,6 @@ export default function FormDeCliente(props) {
     initialState,
     handleChangeComMask,
   ] = useContext(Context);
-  const drawerWidth = 200;
-
-  const drawerStyle = {
-    width: drawerWidth,
-    flexShrink: 0,
-    [`& .MuiDrawer-paper`]: {
-      width: drawerWidth,
-      boxSizing: 'border-box',
-    },
-  };
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -60,7 +51,7 @@ export default function FormDeCliente(props) {
               name='id_cliente'
               value={dados.id_cliente}
               label={'id_cliente'}
-              disabled={'true'}
+              disabled={true}
             />
             <Grid item xs={10}></Grid>
             <Grid item xs={2}>
