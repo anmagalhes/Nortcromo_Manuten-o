@@ -144,7 +144,7 @@ export default function FormDeCliente(props) {
               <Button
                 variant='outlined'
                 onClick={() => {
-                  props.setRender('ListaDeClientes');
+                  setRender('ListaDeClientes');
                 }}
               >
                 Voltar

@@ -1,6 +1,8 @@
 import * as React from 'react';
 import FormDeCliente from './componentes/FormDeCliente';
 import ListaDeClientes from './componentes/ListaDeClientes';
+import ListaDeProdutos from './componentes/ListaDeProdutos';
+import FormDeProduto from './componentes/FormDeProduto';
 import Inicio from './componentes/Inicio';
 import Context from './multiuso/Context';
 import { useState, useEffect, useContext } from 'react';
@@ -9,6 +11,7 @@ import { mask } from './multiuso/mask.js';
 function App() {
   const [render, setRender] = useState('Inicio');
   const initialState = {
+    // Cliente
     id_cliente: '',
     tipo_cliente: '',
     razao_social_cliente: '',
@@ -23,6 +26,14 @@ function App() {
     cidade_cliente: '',
     uf_cliente: '',
     complemento_cliente: '',
+    // produtos
+    id_produtos: '',
+    tipo_produtos: '',
+    origem_produtos: '',
+    descricao_produtos: '',
+    fornecedor_produtos: '',
+    estoque_minimo_produtos: '',
+    status_produtos: '',
   };
   const [dados, setDados] = useState(initialState);
   const handleChange = (event) => {
@@ -59,7 +70,7 @@ function App() {
       .then(
         (result) => {
           alert('sucesso');
-          setRender('ListaDeClientes');
+          setRender('Inicio');
         },
         (error) => {
           alert(error);
@@ -105,6 +116,10 @@ function Estrutura() {
       return <ListaDeClientes />;
     case 'FormDeCliente':
       return <FormDeCliente />;
+    case 'ListaDeProdutos':
+      return <ListaDeProdutos />;
+    case 'FormDeProduto':
+      return <FormDeProduto />;
   }
 }
 

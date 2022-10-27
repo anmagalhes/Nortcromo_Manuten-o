@@ -1,6 +1,7 @@
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import ListItemButton from '@mui/material/ListItemButton';
 import BuildIcon from '@mui/icons-material/BuildOutlined';
 import FactoryOutlinedIcon from '@mui/icons-material/FactoryOutlined';
@@ -30,6 +31,15 @@ export default function BtnLateral() {
             }}
           >
             <BadgeOutlinedIcon /> Clientes
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton
+            onClick={() => {
+              setRender('ListaDeProdutos');
+            }}
+          >
+            <ShoppingCartOutlinedIcon /> ListaDeProdutos
           </ListItemButton>
         </ListItem>
       </List>
