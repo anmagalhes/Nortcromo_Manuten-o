@@ -137,3 +137,14 @@ def lerLinhaClientes():
     results = transformaEmDict(g.cur.fetchall(), list(g.cur.description))
 
     return jsonify(dados=results)
+
+@app.route("/lerProdutos", methods=['POST'])
+def lerProdutos():
+    g.cur.execute(""" SELECT
+        id_cliente as id,
+        razao_social_cliente,
+        cnpj_cliente     
+    FROM clientes
+    """)
+    results = transformaEmDict(g.cur.fetchall(), list(g.cur.description))
+    return jsonify(dados=results)
