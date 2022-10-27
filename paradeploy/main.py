@@ -36,8 +36,6 @@ def before_request_callback():
     g.engine = engine
     g.user = None
 
-
-
 @app.route("/inserirCliente", methods=['POST'])
 def inserirCliente():
     oQueLancar = request.json['oQueLancar']
