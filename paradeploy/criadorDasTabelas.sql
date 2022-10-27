@@ -11,7 +11,7 @@ CREATE TABLE clientes (
 	cep_cliente               TEXT,
 	logradouro_cliente        TEXT,
 	numero_cliente            TEXT,
-	bairro_cliente            TEXT,
+	bairro_cliente             TEXT,
 	cidade_cliente            TEXT,
 	uf_cliente                TEXT,
 	complemento_cliente       TEXT,

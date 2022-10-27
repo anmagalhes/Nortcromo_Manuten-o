@@ -148,3 +148,4 @@ def lerProdutos():
     """)
     results = transformaEmDict(g.cur.fetchall(), list(g.cur.description))
     return jsonify(dados=results)
+
