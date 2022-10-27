@@ -76,7 +76,6 @@ export default function DataTable() {
               }
             );
         }}
-        // checkboxSelection
       />
     </div>
   );
