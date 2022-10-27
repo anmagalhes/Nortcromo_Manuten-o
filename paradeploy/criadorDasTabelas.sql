@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS clientes;
 DROP TABLE IF EXISTS produtos;
+DROP TABLE IF EXISTS servicos;
 
 CREATE TABLE clientes (
 	id_cliente                SERIAL PRIMARY KEY,
@@ -28,5 +29,13 @@ CREATE TABLE produtos (
 	fornecedor_produtos       TEXT,
 	estoque_minimo_produtos   TEXT,
 	status_produtos           TEXT
-)
+);
+
+CREATE TABLE servicos (
+	id_servicos                SERIAL PRIMARY KEY,
+	grupo_servicos             TEXT,
+	sigla_servicos             TEXT,
+	material_servicos          TEXT,
+	tempo_servicos             TEXT
+);
 

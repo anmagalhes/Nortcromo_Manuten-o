@@ -1,3 +1,4 @@
+import PlumbingOutlinedIcon from '@mui/icons-material/PlumbingOutlined';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -39,7 +40,16 @@ export default function BtnLateral() {
               setRender('ListaDeProdutos');
             }}
           >
-            <ShoppingCartOutlinedIcon /> ListaDeProdutos
+            <ShoppingCartOutlinedIcon /> Lista De Produtos
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton
+            onClick={() => {
+              setRender('ListaDeServicos');
+            }}
+          >
+            <PlumbingOutlinedIcon /> Lista de Serviços
           </ListItemButton>
         </ListItem>
       </List>

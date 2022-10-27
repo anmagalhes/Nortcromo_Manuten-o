@@ -36,6 +36,8 @@ def before_request_callback():
     g.engine = engine
     g.user = None
 
+
+
 @app.route("/inserirCliente", methods=['POST'])
 def inserirCliente():
     oQueLancar = request.json['oQueLancar']
@@ -138,6 +140,7 @@ def lerLinhaClientes():
 
     return jsonify(dados=results)
 
+
 @app.route("/lerProdutos", methods=['POST'])
 def lerProdutos():
     g.cur.execute(""" SELECT
@@ -199,6 +202,64 @@ def lerLinhaProdutos():
         estoque_minimo_produtos,
         status_produtos
     FROM produtos WHERE id_produtos = """+oQueProcurar)
+    results = transformaEmDict(g.cur.fetchall(), list(g.cur.description))
+
+    return jsonify(dados=results)
+
+
+@app.route("/lerServicos", methods=['POST'])
+def lerServicos():
+    g.cur.execute(""" SELECT
+        id_servicos as id,
+        sigla_servicos
+    FROM servicos
+    """)
+    results = transformaEmDict(g.cur.fetchall(), list(g.cur.description))
+    return jsonify(dados=results)
+
+@app.route("/inserirServico", methods=['POST'])
+def inserirServico():
+    oQueLancar = request.json['oQueLancar']
+    if(oQueLancar['id_servicos'] == ''):
+        query = """
+        INSERT INTO
+            servicos
+        (
+            grupo_servicos,
+            sigla_servicos,
+            material_servicos,
+            tempo_servicos
+        ) VALUES (
+            '"""+oQueLancar['grupo_servicos']+"""',
+            '"""+oQueLancar['sigla_servicos']+"""',
+            '"""+oQueLancar['material_servicos']+"""',
+            '"""+oQueLancar['tempo_servicos']+"""'
+        )       
+        """
+    else:
+        query = """
+        UPDATE servicos
+            SET
+                grupo_servicos = '"""+oQueLancar['grupo_servicos']+"""',
+                sigla_servicos = '"""+oQueLancar['sigla_servicos']+"""',
+                material_servicos = '"""+oQueLancar['material_servicos']+"""',
+                tempo_servicos = '"""+oQueLancar['tempo_servicos']+"""'
+            WHERE id_servicos = """+str(oQueLancar['id_servicos'])+""" RETURNING id_servicos;"""
+
+    g.cur.execute(query)
+    g.connection.commit()
+    return jsonify(oQueLancar=oQueLancar)
+
+@app.route("/lerLinhaServicos", methods=['POST'])
+def lerLinhaServicos():
+    oQueProcurar = str(request.json['oQueProcurar'])
+    g.cur.execute(""" SELECT
+        id_servicos,
+        grupo_servicos,
+        sigla_servicos,
+        material_servicos,
+        tempo_servicos
+    FROM servicos WHERE id_servicos = """+oQueProcurar)
     results = transformaEmDict(g.cur.fetchall(), list(g.cur.description))
 
     return jsonify(dados=results)
