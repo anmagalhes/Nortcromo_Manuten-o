@@ -146,5 +146,3 @@ def lerLinhaClientes():
         results.append(row_dict)
 
     return jsonify(dados=results)
-
-app.run()

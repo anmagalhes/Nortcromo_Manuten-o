@@ -110,8 +110,8 @@ export default function FormDeCliente(props) {
             />
             <MyTextField
               xs={2}
-              name='CEP_cliente'
-              value={dados.CEP_cliente}
+              name='cep_cliente'
+              value={dados.cep_cliente}
               label={'CEP'}
             />
             <MyTextField

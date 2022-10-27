@@ -42,7 +42,7 @@ function App() {
     whatsapp_cliente: '',
     fone_cliente: '',
     fone_recado_cliente: '',
-    CEP_cliente: '',
+    cep_cliente: '',
     logradouro_cliente: '',
     numero_cliente: '',
     bairro_cliente: '',
