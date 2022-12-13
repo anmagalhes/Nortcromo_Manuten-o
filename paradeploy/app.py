@@ -41,11 +41,9 @@ def before_request_callback():
 def inserirCliente():
     oQueLancar = request.json['oQueLancar']
     print(oQueLancar)
-    payload = {'key1': 'value1', 'key2': 'value2'}
-    url = "https://script.google.com/macros/s/AKfycbwD2vMdoXgvLAKSQ5uGc6lD0cffbRUm1n9oz_FLzYWMg7X6r9MEd2dcJ8hVltCx-FCZvg/exec"
+    payload = oQueLancar
+    url = "https://script.google.com/macros/s/AKfycbyeA9uIs56AofNt5nD_XXsETwdjSVtoxB77DWmJpVYmp7YljfjVcvdgWOe5mddRo9LEUA/exec"
     r = requests.post(url, data=payload)
-    x = r.json()
-    print(x)
 
     # if(oQueLancar['id_cliente'] == ''):
     #     query = """
