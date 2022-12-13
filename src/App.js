@@ -10,6 +10,15 @@ import Context from './multiuso/Context';
 import { useState, useEffect, useContext } from 'react';
 import { mask } from './multiuso/mask.js';
 
+let myUrl;
+if (document.URL == 'http://localhost:3000/') {
+  console.log('aqui');
+  myUrl = 'http://127.0.0.1:5000/';
+} else {
+  console.log('acola');
+
+  myUrl = document.URL;
+}
 function App() {
   const [render, setRender] = useState('Inicio');
   const initialState = {
@@ -64,8 +73,9 @@ function App() {
       };
     });
   };
+
   function lancarNoBanco(rotaPInserir) {
-    fetch('http://127.0.0.1:5000/inserirCliente', {
+    fetch(myUrl + 'inserirCliente', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
