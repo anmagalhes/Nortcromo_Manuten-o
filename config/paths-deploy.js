@@ -54,8 +54,8 @@ const resolveModule = (resolveFn, filePath) => {
 module.exports = {
   dotenv: resolveApp(".env"),
   appPath: resolveApp("."),
-  appBuild: resolveApp(buildPath),
-  // appBuild: resolveApp("paradeploy/static/react"),
+  // appBuild: resolveApp(buildPath),
+  appBuild: resolveApp("paradeploy/static/react"),
   appPublic: resolveApp("public"),
   appHtml: resolveApp("public/index.html"),
   appIndexJs: resolveModule(resolveApp, "src/index"),
