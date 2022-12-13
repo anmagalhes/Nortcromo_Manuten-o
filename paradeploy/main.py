@@ -138,7 +138,6 @@ def lerLinhaClientes():
 
     return jsonify(dados=results)
 
-
 @app.route("/lerProdutos", methods=['POST'])
 def lerProdutos():
     g.cur.execute(""" SELECT
@@ -203,7 +202,6 @@ def lerLinhaProdutos():
     results = transformaEmDict(g.cur.fetchall(), list(g.cur.description))
 
     return jsonify(dados=results)
-
 
 @app.route("/lerServicos", methods=['POST'])
 def lerServicos():
