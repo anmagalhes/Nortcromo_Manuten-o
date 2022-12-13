@@ -32,16 +32,14 @@ export default function DataTable(props) {
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:5000' + props.dados, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
+    fetch(
+      'https://script.google.com/macros/s/AKfycbxub7LGQxHVcHvJE7JVCgOWI04e7zYDn8NONnBWbkTs9ovvI4RITwClrjw5TqEPGTmGGA/exec'
+    )
       .then((res) => res.json())
       .then(
         (result) => {
-          setRows(result.dados);
+          console.log(result);
+          // setRows(result.dados);
           setLoading(false);
         },
         (error) => {
@@ -99,28 +97,28 @@ export default function DataTable(props) {
                   columns={columns}
                   pageSize={5}
                   rowsPerPageOptions={[5]}
-                  onCellClick={(e) => {
-                    fetch('http://127.0.0.1:5000' + props.lerlinha, {
-                      method: 'POST',
-                      headers: {
-                        'Content-Type': 'application/json',
-                      },
-                      body: JSON.stringify({
-                        oQueProcurar: e.id,
-                      }),
-                    })
-                      .then((res) => res.json())
-                      .then(
-                        (result) => {
-                          result = result.dados[0];
-                          setDados(result);
-                          setRender(props.renderAposClick);
-                        },
-                        (error) => {
-                          console.log(error);
-                        }
-                      );
-                  }}
+                  // onCellClick={(e) => {
+                  //   fetch('http://127.0.0.1:5000' + props.lerlinha, {
+                  //     method: 'POST',
+                  //     headers: {
+                  //       'Content-Type': 'application/json',
+                  //     },
+                  //     body: JSON.stringify({
+                  //       oQueProcurar: e.id,
+                  //     }),
+                  //   })
+                  //     .then((res) => res.json())
+                  //     .then(
+                  //       (result) => {
+                  //         result = result.dados[0];
+                  //         setDados(result);
+                  //         setRender(props.renderAposClick);
+                  //       },
+                  //       (error) => {
+                  //         console.log(error);
+                  //       }
+                  //     );
+                  // }}
                 />
               </div>
             </Grid>

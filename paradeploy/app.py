@@ -1,5 +1,6 @@
 from flask import Flask, render_template, jsonify, request, g
 from sqlalchemy import create_engine
+import requests
 
 app = Flask("__main__")
 
@@ -26,7 +27,7 @@ def after_request_callback(response):
 @app.before_request 
 def before_request_callback(): 
     print("BEFORE")
-    myDataBase = 'postgresql://antonioMelo:dante123@localhost:5432'
+    # myDataBase = 'postgresql://antonioMelo:dante123@localhost:5432'
     # app.config["SQLALCHEMY_DATABASE_URI"] = myDataBase
     # engine = create_engine(myDataBase)
     # connection = engine.raw_connection()
@@ -39,67 +40,75 @@ def before_request_callback():
 @app.route("/inserirCliente", methods=['POST'])
 def inserirCliente():
     oQueLancar = request.json['oQueLancar']
-    if(oQueLancar['id_cliente'] == ''):
-        query = """
-        INSERT INTO
-            clientes
-        (
-            tipo_cliente,
-            razao_social_cliente,
-            cnpj_cliente,
-            whatsapp_cliente,
-            fone_cliente,
-            fone_recado_cliente,
-            cep_cliente,
-            logradouro_cliente,
-            numero_cliente,
-            bairro_cliente,
-            cidade_cliente,
-            uf_cliente,
-            complemento_cliente,
-            databr_cliente,
-            horario_cliente
-        ) VALUES (
-            '"""+oQueLancar['tipo_cliente']+"""',
-            '"""+oQueLancar['razao_social_cliente']+"""',
-            '"""+oQueLancar['cnpj_cliente']+"""',
-            '"""+oQueLancar['whatsapp_cliente']+"""',
-            '"""+oQueLancar['fone_cliente']+"""',
-            '"""+oQueLancar['fone_recado_cliente']+"""',
-            '"""+oQueLancar['cep_cliente']+"""',
-            '"""+oQueLancar['logradouro_cliente']+"""',
-            '"""+oQueLancar['numero_cliente']+"""',
-            '"""+oQueLancar['bairro_cliente']+"""',
-            '"""+oQueLancar['cidade_cliente']+"""',
-            '"""+oQueLancar['uf_cliente']+"""',
-            '"""+oQueLancar['complemento_cliente']+"""',
-            CURRENT_DATE,
-            CURRENT_TIMESTAMP
-        )       
-        """
-    else:
-        query = """
-        UPDATE clientes
-            SET
-                tipo_cliente = '"""+oQueLancar['tipo_cliente']+"""',
-                razao_social_cliente = '"""+oQueLancar['razao_social_cliente']+"""',
-                cnpj_cliente = '"""+oQueLancar['cnpj_cliente']+"""',
-                whatsapp_cliente = '"""+oQueLancar['whatsapp_cliente']+"""',
-                fone_cliente = '"""+oQueLancar['fone_cliente']+"""',
-                fone_recado_cliente = '"""+oQueLancar['fone_recado_cliente']+"""',
-                cep_cliente = '"""+oQueLancar['cep_cliente']+"""',
-                logradouro_cliente = '"""+oQueLancar['logradouro_cliente']+"""',
-                numero_cliente = '"""+oQueLancar['numero_cliente']+"""',
-                bairro_cliente = '"""+oQueLancar['bairro_cliente']+"""',
-                cidade_cliente = '"""+oQueLancar['cidade_cliente']+"""',
-                uf_cliente = '"""+oQueLancar['uf_cliente']+"""',
-                complemento_cliente = '"""+oQueLancar['complemento_cliente']+"""',
-                databr_cliente = CURRENT_DATE,
-                horario_cliente = CURRENT_TIMESTAMP
-            WHERE id_cliente = """+str(oQueLancar['id_cliente'])+""" RETURNING id_cliente;"""
+    print(oQueLancar)
+    payload = {'key1': 'value1', 'key2': 'value2'}
+    url = "https://script.google.com/macros/s/AKfycbwD2vMdoXgvLAKSQ5uGc6lD0cffbRUm1n9oz_FLzYWMg7X6r9MEd2dcJ8hVltCx-FCZvg/exec"
+    r = requests.post(url, data=payload)
+    x = r.json()
+    print(x)
 
-    g.cur.execute(query)
-    g.connection.commit()
+    # if(oQueLancar['id_cliente'] == ''):
+    #     query = """
+    #     INSERT INTO
+    #         clientes
+    #     (
+    #         tipo_cliente,
+    #         razao_social_cliente,
+    #         cnpj_cliente,
+    #         whatsapp_cliente,
+    #         fone_cliente,
+    #         fone_recado_cliente,
+    #         cep_cliente,
+    #         logradouro_cliente,
+    #         numero_cliente,
+    #         bairro_cliente,
+    #         cidade_cliente,
+    #         uf_cliente,
+    #         complemento_cliente,
+    #         databr_cliente,
+    #         horario_cliente
+    #     ) VALUES (
+    #         '"""+oQueLancar['tipo_cliente']+"""',
+    #         '"""+oQueLancar['razao_social_cliente']+"""',
+    #         '"""+oQueLancar['cnpj_cliente']+"""',
+    #         '"""+oQueLancar['whatsapp_cliente']+"""',
+    #         '"""+oQueLancar['fone_cliente']+"""',
+    #         '"""+oQueLancar['fone_recado_cliente']+"""',
+    #         '"""+oQueLancar['cep_cliente']+"""',
+    #         '"""+oQueLancar['logradouro_cliente']+"""',
+    #         '"""+oQueLancar['numero_cliente']+"""',
+    #         '"""+oQueLancar['bairro_cliente']+"""',
+    #         '"""+oQueLancar['cidade_cliente']+"""',
+    #         '"""+oQueLancar['uf_cliente']+"""',
+    #         '"""+oQueLancar['complemento_cliente']+"""',
+    #         CURRENT_DATE,
+    #         CURRENT_TIMESTAMP
+    #     )       
+    #     """
+    # else:
+    #     query = """
+    #     UPDATE clientes
+    #         SET
+    #             tipo_cliente = '"""+oQueLancar['tipo_cliente']+"""',
+    #             razao_social_cliente = '"""+oQueLancar['razao_social_cliente']+"""',
+    #             cnpj_cliente = '"""+oQueLancar['cnpj_cliente']+"""',
+    #             whatsapp_cliente = '"""+oQueLancar['whatsapp_cliente']+"""',
+    #             fone_cliente = '"""+oQueLancar['fone_cliente']+"""',
+    #             fone_recado_cliente = '"""+oQueLancar['fone_recado_cliente']+"""',
+    #             cep_cliente = '"""+oQueLancar['cep_cliente']+"""',
+    #             logradouro_cliente = '"""+oQueLancar['logradouro_cliente']+"""',
+    #             numero_cliente = '"""+oQueLancar['numero_cliente']+"""',
+    #             bairro_cliente = '"""+oQueLancar['bairro_cliente']+"""',
+    #             cidade_cliente = '"""+oQueLancar['cidade_cliente']+"""',
+    #             uf_cliente = '"""+oQueLancar['uf_cliente']+"""',
+    #             complemento_cliente = '"""+oQueLancar['complemento_cliente']+"""',
+    #             databr_cliente = CURRENT_DATE,
+    #             horario_cliente = CURRENT_TIMESTAMP
+    #         WHERE id_cliente = """+str(oQueLancar['id_cliente'])+""" RETURNING id_cliente;"""
+
+    # g.cur.execute(query)
+    # g.connection.commit()
+    oQueLancar = ''
     return jsonify(oQueLancar=oQueLancar)
 
 @app.route("/lerClientes", methods=['POST'])
@@ -260,4 +269,4 @@ def lerLinhaServicos():
 
     return jsonify(dados=results)
 
-# app.run()
+app.run()

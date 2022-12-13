@@ -65,7 +65,7 @@ function App() {
     });
   };
   function lancarNoBanco(rotaPInserir) {
-    fetch('http://127.0.0.1:5000/' + rotaPInserir, {
+    fetch('http://127.0.0.1:5000/inserirCliente', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -78,7 +78,7 @@ function App() {
       .then(
         (result) => {
           alert('sucesso');
-          setRender('Inicio');
+          // setRender('Inicio');
         },
         (error) => {
           alert(error);
@@ -86,6 +86,28 @@ function App() {
         }
       );
   }
+  // function lancarNoBanco(rotaPInserir) {
+  //   fetch('http://127.0.0.1:5000/' + rotaPInserir, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({
+  //       oQueLancar: dados,
+  //     }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then(
+  //       (result) => {
+  //         alert('sucesso');
+  //         setRender('Inicio');
+  //       },
+  //       (error) => {
+  //         alert(error);
+  //         console.log(error);
+  //       }
+  //     );
+  // }
 
   return (
     <Context.Provider
