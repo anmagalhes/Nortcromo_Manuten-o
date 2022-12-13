@@ -19,22 +19,22 @@ def index():
 @app.after_request 
 def after_request_callback(response): 
     print('AFTER') 
-    g.connection.close()
-    g.engine.dispose()
+    # g.connection.close()
+    # g.engine.dispose()
     return response 
 
 @app.before_request 
 def before_request_callback(): 
     print("BEFORE")
     myDataBase = 'postgresql://antonioMelo:dante123@localhost:5432'
-    app.config["SQLALCHEMY_DATABASE_URI"] = myDataBase
-    engine = create_engine(myDataBase)
-    connection = engine.raw_connection()
-    cur = connection.cursor() 
-    g.connection = connection
-    g.cur = cur
-    g.engine = engine
-    g.user = None
+    # app.config["SQLALCHEMY_DATABASE_URI"] = myDataBase
+    # engine = create_engine(myDataBase)
+    # connection = engine.raw_connection()
+    # cur = connection.cursor() 
+    # g.connection = connection
+    # g.cur = cur
+    # g.engine = engine
+    # g.user = None
 
 @app.route("/inserirCliente", methods=['POST'])
 def inserirCliente():
@@ -260,4 +260,4 @@ def lerLinhaServicos():
 
     return jsonify(dados=results)
 
-app.run()
+# app.run()

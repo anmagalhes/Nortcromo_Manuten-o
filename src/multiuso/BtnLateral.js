@@ -52,6 +52,36 @@ export default function BtnLateral() {
             <PlumbingOutlinedIcon /> Lista de Serviços
           </ListItemButton>
         </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton
+            onClick={() => {
+              fetch(
+                'https://script.google.com/macros/s/AKfycbysk2kl6zbvesI8tmUvarT7YPQUT8giwn9S_Z4k0yYMXUYD0uByCmzwtdHmL_9tJDCjoA/exec',
+                {
+                  // headers: {
+                  // 'Content-Type': 'application/json',
+                  // },
+                  // body: JSON.stringify({
+                  // oQueLancar: dados,
+                  // }),
+                }
+              )
+                .then((res) => res.json())
+                .then(
+                  (result) => {
+                    console.log(result);
+                    // alert('sucesso');
+                    // setRender('Inicio');
+                  },
+                  (error) => {
+                    console.log(error);
+                  }
+                );
+            }}
+          >
+            Buscar
+          </ListItemButton>
+        </ListItem>
       </List>
     </Box>
   );
