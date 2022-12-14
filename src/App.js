@@ -19,6 +19,8 @@ if (document.URL == 'http://localhost:3000/') {
 function App() {
   const [render, setRender] = useState('Inicio');
   const initialState = {
+    // Func
+    qualFunc: '',
     // Cliente
     id_cliente: '',
     tipo_cliente: '',
@@ -72,13 +74,6 @@ function App() {
   };
 
   function lancarNoBanco() {
-    // setDados((prevState) => {
-    //   return {
-    //     ...prevState,
-    //     ['qualFunc']: 'inserir',
-    //   };
-    // });
-    console.log(myUrl + 'inserirCliente');
     fetch(myUrl + 'inserirCliente', {
       method: 'POST',
       headers: {
@@ -91,36 +86,13 @@ function App() {
       .then((res) => res.json())
       .then(
         (result) => {
-          alert('sucesso');
-          // setRender('Inicio');
+          setRender('Inicio');
         },
         (error) => {
           console.log(error);
         }
       );
   }
-  // function lancarNoBanco(rotaPInserir) {
-  //   fetch('http://127.0.0.1:5000/' + rotaPInserir, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({
-  //       oQueLancar: dados,
-  //     }),
-  //   })
-  //     .then((res) => res.json())
-  //     .then(
-  //       (result) => {
-  //         alert('sucesso');
-  //         setRender('Inicio');
-  //       },
-  //       (error) => {
-  //         alert(error);
-  //         console.log(error);
-  //       }
-  //     );
-  // }
 
   return (
     <Context.Provider
