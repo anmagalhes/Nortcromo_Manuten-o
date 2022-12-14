@@ -28,6 +28,7 @@ def after_request_callback(response):
 def before_request_callback(): 
     print("BEFORE")
 
+urlCliente = 'https://script.google.com/macros/s/AKfycbxxM_VaGyvihTzEAGYaCMYXI_p5PFanwcuFU69YLSDmPgKWxcNCLQrUtCzCTZPAaxSx5g/exec'
 
 @app.route("/inserirCliente", methods=['POST'])
 def inserirCliente():
@@ -39,8 +40,6 @@ def inserirCliente():
     
     oQueLancar = ''
     return jsonify(oQueLancar=oQueLancar)
-
-urlCliente = 'https://script.google.com/macros/s/AKfycbxxM_VaGyvihTzEAGYaCMYXI_p5PFanwcuFU69YLSDmPgKWxcNCLQrUtCzCTZPAaxSx5g/exec'
 
 @app.route("/lerClientes", methods=['POST'])
 def lerClientes():

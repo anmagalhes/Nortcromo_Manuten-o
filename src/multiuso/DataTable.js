@@ -62,8 +62,8 @@ export default function DataTable(props) {
 
   if (isLoading) {
     return (
-      <div className='loader-container'>
-        <div className='spinner'></div>
+      <div className='spinner-container'>
+        <div className='loading-spinner'></div>
       </div>
     );
   } else {
