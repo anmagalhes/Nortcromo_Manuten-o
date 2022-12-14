@@ -12,11 +12,8 @@ import { mask } from './multiuso/mask.js';
 
 let myUrl;
 if (document.URL == 'http://localhost:3000/') {
-  console.log('aqui');
   myUrl = 'http://127.0.0.1:5000/';
 } else {
-  console.log('acola');
-
   myUrl = document.URL;
 }
 function App() {
@@ -74,7 +71,14 @@ function App() {
     });
   };
 
-  function lancarNoBanco(rotaPInserir) {
+  function lancarNoBanco() {
+    // setDados((prevState) => {
+    //   return {
+    //     ...prevState,
+    //     ['qualFunc']: 'inserir',
+    //   };
+    // });
+    console.log(myUrl + 'inserirCliente');
     fetch(myUrl + 'inserirCliente', {
       method: 'POST',
       headers: {
@@ -91,7 +95,6 @@ function App() {
           // setRender('Inicio');
         },
         (error) => {
-          alert(error);
           console.log(error);
         }
       );

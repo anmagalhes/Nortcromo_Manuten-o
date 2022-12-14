@@ -39,6 +39,7 @@ def before_request_callback():
 
 @app.route("/inserirCliente", methods=['POST'])
 def inserirCliente():
+    print("123")
     oQueLancar = request.json['oQueLancar']
     print(oQueLancar)
     payload = oQueLancar
@@ -267,4 +268,4 @@ def lerLinhaServicos():
 
     return jsonify(dados=results)
 
-app.run()
+# app.run()

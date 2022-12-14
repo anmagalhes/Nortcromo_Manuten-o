@@ -16,6 +16,13 @@ import Button from '@mui/material/Button';
 import SearchIcon from '@mui/icons-material/Search';
 import Box from '@mui/material/Box';
 
+let myUrl;
+if (document.URL == 'http://localhost:3000/') {
+  myUrl = 'http://127.0.0.1:5000/';
+} else {
+  myUrl = document.URL;
+}
+
 export default function DataTable(props) {
   const columns = props.columns;
   const [
