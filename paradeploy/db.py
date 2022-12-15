@@ -1,9 +1,14 @@
-import mysql.connector
 
-mydb = mysql.connector.connect(
-  host="nortcromo.mysql.pythonanywhere-services.com",
-  user="nortcromo",
-  password="z_zyNR!Sc!Hf6wP"
-)
 
-print(mydb)
+while True:
+  x = input("escreva algo \n")
+  if x.isdigit():
+    if int(x) == 1:
+      print('Top!')
+    elif int(x) == 2:
+      print('Massa!')
+  elif str(x) == 'sair':
+    break
+
+
+
