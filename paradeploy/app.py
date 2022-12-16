@@ -31,17 +31,15 @@ def after_request_callback(response):
 def before_request_callback(): 
     print("BEFORE")
 
-urlCliente = 'https://script.google.com/macros/s/AKfycbxxM_VaGyvihTzEAGYaCMYXI_p5PFanwcuFU69YLSDmPgKWxcNCLQrUtCzCTZPAaxSx5g/exec'
-
 @app.route("/inserirCliente", methods=['POST'])
 def inserirCliente():
     oQueLancar = request.json['oQueLancar']
     oQueLancar['qualFunc'] = 'inserirCliente'
-    payload = oQueLancar
-    url = urlCliente
-    r = requests.post(url, data=payload)
-    
-    oQueLancar = ''
+    sh = gc.open_by_url("https://docs.google.com/spreadsheets/d/10PZMetlcxl179TLY_YWc0UYk_Wg-T9j-nB6otPagRUg") 
+    x = sh.worksheet()
+    header = x.get_row(1)
+    print(header)
+    print(oQueLancar)
     return jsonify(oQueLancar=oQueLancar)
 
 @app.route("/lerClientes", methods=['POST'])
@@ -64,16 +62,6 @@ def lerLinhaClientes():
     valoresAchados = df.loc[df['id'] == oQueProcurar]
     valoresAchados = valoresAchados.to_dict(orient='records')[0]
     valoresAchados['id_cliente'] = valoresAchados['id']
-    print(valoresAchados)
-
-    # print(oQueProcurar)
-    # url = urlCliente
-    # payload = {
-    #     'oQueProcurar': oQueProcurar,
-    #     'qualFunc': 'lerLinhaCliente'
-    # }
-    # r = requests.post(url, data=payload)
-    # results = transformaEmDict(r.json()[1:len(r.json())], list(r.json()[0]))
     return jsonify(dados=valoresAchados)
 
 @app.route("/lerProdutos", methods=['POST'])

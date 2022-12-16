@@ -74,6 +74,7 @@ function App() {
   };
 
   function lancarNoBanco() {
+    console.log(dados);
     fetch(myUrl + 'inserirCliente', {
       method: 'POST',
       headers: {
@@ -86,7 +87,8 @@ function App() {
       .then((res) => res.json())
       .then(
         (result) => {
-          setRender('Inicio');
+          console.log(result);
+          // setRender('Inicio');
         },
         (error) => {
           console.log(error);
