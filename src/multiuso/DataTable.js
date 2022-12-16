@@ -104,6 +104,8 @@ export default function DataTable(props) {
                   pageSize={5}
                   rowsPerPageOptions={[5]}
                   onCellClick={(e) => {
+                    setLoading(true);
+
                     fetch(myUrl + 'lerLinhaClientes', {
                       method: 'POST',
                       headers: {
@@ -116,10 +118,10 @@ export default function DataTable(props) {
                       .then((res) => res.json())
                       .then(
                         (result) => {
-                          console.log(result);
                           result = result.dados;
                           setDados(result);
                           setRender('FormDeCliente');
+                          setLoading(false);
                         },
                         (error) => {
                           console.log(error);
