@@ -7,7 +7,6 @@ export default function ListaDeClientes() {
     { field: 'cnpj_cliente', headerName: 'CNPJ', flex: 1 },
   ];
 
-  // return <div>123</div>;
   return (
     <DataTable
       titulo={'Clientes'}

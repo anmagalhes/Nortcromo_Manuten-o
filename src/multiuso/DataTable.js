@@ -15,6 +15,7 @@ import MyTextField from '../multiuso/MyTextField';
 import Button from '@mui/material/Button';
 import SearchIcon from '@mui/icons-material/Search';
 import Box from '@mui/material/Box';
+import MyLoading from './MyLoading';
 
 let myUrl;
 if (document.URL == 'http://localhost:3000/') {
@@ -44,9 +45,6 @@ export default function DataTable(props) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        oQueLancar: dados,
-      }),
     })
       .then((res) => res.json())
       .then(
@@ -61,11 +59,7 @@ export default function DataTable(props) {
   }, []);
 
   if (isLoading) {
-    return (
-      <div className='spinner-container'>
-        <div className='loading-spinner'></div>
-      </div>
-    );
+    return <MyLoading />;
   } else {
     return (
       <Box sx={{ display: 'flex' }}>
@@ -123,7 +117,7 @@ export default function DataTable(props) {
                       .then(
                         (result) => {
                           console.log(result);
-                          result = result.dados[0];
+                          result = result.dados;
                           setDados(result);
                           setRender('FormDeCliente');
                         },

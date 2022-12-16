@@ -49,28 +49,32 @@ def lerClientes():
     sh = gc.open_by_url("https://docs.google.com/spreadsheets/d/10PZMetlcxl179TLY_YWc0UYk_Wg-T9j-nB6otPagRUg") 
     x = sh.worksheet()
     y = x.get_all_values()
-    results = transformaEmDict(y[1:len(y)], list(y[0])) # 671 ms
-    # url = urlCliente
-    # oQueLancar = request.json['oQueLancar']
-    # oQueLancar['qualFunc'] = 'lerClientes'
-    # payload = oQueLancar
-    # r = requests.post(url, data=payload)
-    # results = transformaEmDict(r.json()[1:len(r.json())], list(r.json()[0]))
-
+    results = transformaEmDict(y[1:len(y)], list(y[0]))
     return jsonify(dados=results)
 
 @app.route("/lerLinhaClientes", methods=['POST'])
 def lerLinhaClientes():
     oQueProcurar = str(request.json['oQueProcurar'])
-    print(oQueProcurar)
-    url = urlCliente
-    payload = {
-        'oQueProcurar': oQueProcurar,
-        'qualFunc': 'lerLinhaCliente'
-    }
-    r = requests.post(url, data=payload)
-    results = transformaEmDict(r.json()[1:len(r.json())], list(r.json()[0]))
-    return jsonify(dados=results)
+    sh = gc.open_by_url("https://docs.google.com/spreadsheets/d/10PZMetlcxl179TLY_YWc0UYk_Wg-T9j-nB6otPagRUg") 
+    x = sh.worksheet()
+    df = pd.DataFrame(x)
+    new_header = df.iloc[0] 
+    df = df[1:] 
+    df.columns = new_header 
+    valoresAchados = df.loc[df['id'] == oQueProcurar]
+    valoresAchados = valoresAchados.to_dict(orient='records')[0]
+    valoresAchados['id_cliente'] = valoresAchados['id']
+    print(valoresAchados)
+
+    # print(oQueProcurar)
+    # url = urlCliente
+    # payload = {
+    #     'oQueProcurar': oQueProcurar,
+    #     'qualFunc': 'lerLinhaCliente'
+    # }
+    # r = requests.post(url, data=payload)
+    # results = transformaEmDict(r.json()[1:len(r.json())], list(r.json()[0]))
+    return jsonify(dados=valoresAchados)
 
 @app.route("/lerProdutos", methods=['POST'])
 def lerProdutos():
