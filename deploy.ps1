@@ -22,6 +22,4 @@ Rename-Item "webpack.config-debug.js" -NewName "webpack.config.js"
 Rename-Item "paths.js" -NewName "paths-deploy.js"
 Rename-Item "paths-debug.js" -NewName "paths.js"
 
-
-
-
+python pythonStuff/copiaECola.py

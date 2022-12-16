@@ -196,4 +196,4 @@ def lerLinhaServicos():
 
     return jsonify(dados=results)
 
-app.run()
+# app.run()
