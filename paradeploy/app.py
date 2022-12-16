@@ -42,11 +42,12 @@ def inserirCliente():
     paraLancar = []
     for i in range(len(header)):
         paraLancar.append('')
-    paraLancar[header['tipo_cliente']] = oQueLancar['tipo_cliente']
+    print(header)    
 
-    print(header['tipo_cliente'])
-    print(oQueLancar['tipo_cliente'])
-    print(paraLancar)
+    for x in header:
+        paraLancar[header[x]] = oQueLancar[header[x]]
+
+    print(oQueLancar)
     
     # print(chr(1 + 96))
 
