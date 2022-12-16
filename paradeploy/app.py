@@ -22,7 +22,6 @@ def transformaEmDict(dados, columns):
 
 @app.route("/")
 def index():
-
     return render_template("index.html")
 
 @app.after_request 
