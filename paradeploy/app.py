@@ -40,6 +40,8 @@ def inserirCliente():
     header = x.get_row(1)
     print(header)
     print(oQueLancar)
+    
+    print(chr(1 + 96))
     return jsonify(oQueLancar=oQueLancar)
 
 @app.route("/lerClientes", methods=['POST'])
