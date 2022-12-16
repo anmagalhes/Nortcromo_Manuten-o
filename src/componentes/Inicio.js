@@ -26,6 +26,7 @@ export default function () {
       <MyAppBar setRender={setRender} />
       <Drawer variant='permanent' sx={drawerStyle}>
         <Toolbar />
+        <div>Dante</div>
         <BtnLateral setRender={setRender} render={render} />
       </Drawer>
     </Box>

@@ -1,14 +1,13 @@
 from flask import Flask, render_template, jsonify, request, g
 from sqlalchemy import create_engine
 import requests
-import pygsheets
 import pandas as pd
+import pygsheets
+import os
 
 app = Flask("__main__")
 
-gc = pygsheets.authorize(service_file=r'C:\github\Nortcromo_Manuten-o\paradeploy\nortcromo-61c5d81ddb12.json') 
-
-
+gc = pygsheets.authorize(service_file=os.getcwd() + '/nortcromo-61c5d81ddb12.json') 
 
 def transformaEmDict(dados, columns):
     results = []
@@ -18,7 +17,6 @@ def transformaEmDict(dados, columns):
             row_dict[col] = row[i]
         results.append(row_dict)
     return results
-
 
 @app.route("/")
 def index():
