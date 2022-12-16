@@ -6,6 +6,8 @@ import pandas as pd
 
 app = Flask("__main__")
 
+gc = pygsheets.authorize(service_file=r'C:\github\Nortcromo_Manuten-o\paradeploy\nortcromo-61c5d81ddb12.json') 
+
 
 
 def transformaEmDict(dados, columns):
@@ -17,11 +19,10 @@ def transformaEmDict(dados, columns):
         results.append(row_dict)
     return results
 
+
 @app.route("/")
 def index():
-    gc = pygsheets.authorize(service_file=r'C:\github\Nortcromo_Manuten-o\paradeploy\nortcromo-61c5d81ddb12.json') # provide the json_file name including the .json extension
-    sh = gc.open_by_url("https://docs.google.com/spreadsheets/d/1ixlpmCjD9538lNoT8Sj0-ufA1FHWPACJmltZ-qMjaZo") #provide the url of the g-sheet.
-    print(sh)
+
     return render_template("index.html")
 
 @app.after_request 
@@ -48,12 +49,17 @@ def inserirCliente():
 
 @app.route("/lerClientes", methods=['POST'])
 def lerClientes():
-    url = urlCliente
-    oQueLancar = request.json['oQueLancar']
-    oQueLancar['qualFunc'] = 'lerClientes'
-    payload = oQueLancar
-    r = requests.post(url, data=payload)
-    results = transformaEmDict(r.json()[1:len(r.json())], list(r.json()[0]))
+    sh = gc.open_by_url("https://docs.google.com/spreadsheets/d/10PZMetlcxl179TLY_YWc0UYk_Wg-T9j-nB6otPagRUg") 
+    x = sh.worksheet()
+    y = x.get_all_values()
+    results = transformaEmDict(y[1:len(y)], list(y[0])) # 671 ms
+    # url = urlCliente
+    # oQueLancar = request.json['oQueLancar']
+    # oQueLancar['qualFunc'] = 'lerClientes'
+    # payload = oQueLancar
+    # r = requests.post(url, data=payload)
+    # results = transformaEmDict(r.json()[1:len(r.json())], list(r.json()[0]))
+
     return jsonify(dados=results)
 
 @app.route("/lerLinhaClientes", methods=['POST'])
