@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "nortcromo",
+  "private_key_id": "61c5d81ddb12d8dfc400a3a33c34a846d7188a2b",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCQ6yLDHvuyeMPb\n5Z/pujjvZYzXGKIvMv2nkgNl5LZjmFh0F2w2k+kSSdWyN+u614ig0SVpD3BbGhr2\nPjPl54n093erAuAoTGvxCQIyswpx3IJxyqO+7L6trUYddy6Ed0U4RhP4yOBvSsfz\n73nasrAahTSj/n9CVaD55Ro8ZerWEuggQcuF7PMqMOmwUS/pEjsqfEA8P8vuGLNN\nNXs7O+odK1vRdcuZhF5p9Uo3XjkoyljDY+e6uxY+fRDjFGGPgo3KhKaQ1bbP1sjq\n4OVAJg7JJ7qNTZD80mIfe+zL+hYTaZCUol5zRTdakbvKKsXelvmjY0Cv8HYyQSha\n0kz+zv1vAgMBAAECggEAI0KzIJrHTzOHJFgIwsvm0oj47dU2kRltEnq6jO5LWoxU\n6VpRoC35BdQlRMnKd5m9yrNY0OlKwz/k04lrA0OFE6+q1FdMx0Fg+jLg8AkUP4QR\n0TInCWt9MbD5YG4BSYXjt7+FWIE36pxdboMUORxFMQ68MjLYMAG5u1P9QDjkHNX7\nGuLDxxecSVkGrfrc6IhaltlXTaZF+1CBMHViYiJ3Z5wNlL53PhAs3cdf7uw0n0au\nA3BQDTTGeItHAZ3d7TAfIoUn4TqefI0vLVZJQYqdD+piFLg43oJQS2AKU4rVUHxM\nm6pPuWftdViBC07sSYwFbH4tk0AoIWP72Cu/nU3qoQKBgQDDnr5ccdqE/FH42EX4\nFOVBJ4Nu9nR4S1r/vxzUu9O6jIflydOyJkdeCxGQFWpyzirEugp7yBfkD9jY/yHX\n9iErUQ/iiE5dpBkzZn60ODNVIftxgNVDcazp8M3/AB4cGe7kFtzRO1S4hdyTIYzQ\n7lB00JxN2K/VDCHEIlWXx5hp2QKBgQC9ph55e9smVl7cLp2Fim9DKtHNqRy6Mkoq\n2rKYsuUosU0qsNfyAzi3UyqH2J1QddzJyLW9zLyAqnzL5Ugthwu24ITxI68zChil\n0d6iT+ezzQFrtUI9MEr1idRmRguMHFKuaxoaTqVIpMU9JZVTfXusuc2gRGzaRudH\nQaUB36EMhwKBgQCaJSqnueeRRypoxjNMa1rDXpmJBJd+exK32Cal02Ph6f7kKYex\nJ8yw5FPwj4+T67Vz042TQHbi9UHQrCpE/OPiODwmK3Zk/3wELs3EwUxh1ydFp1ll\njdvNdD0+pR8U0bKW9RUHopL93C2VmqhVspSfmAqypP7ZCHhLDysXMOZ+8QKBgBzC\n265K1VJ8GMjFnQgKlZMXJFhPRFcMl2jmX91+i/he4zgNN8KxMGHFEBcoB7uTFFfZ\nw440RYYx1NlLPWYCLAmhBShY5BIWfuRu7pepDJedCJEgHRqQf127eGXGS6wFA5kG\nDyBcOv7IVk1OrNXLmvz39LJQjj2QMTUCRJcDJjZzAoGBALwNjB0COkhHwGS/hqIg\ntaterQwzQUnTHN4NUz1f7sCYcSi0c6gmqoRjyT6GnS8l8X9R31Ou1bwpI7rDtW7V\nTDy1eeav8frwpAdx4FKXCD030CeEyzBBZQrPVrKf4Cvak61ehM7PyTR743lYRVWw\ns0an9zXSvnklOI25ObIx7iX7\n-----END PRIVATE KEY-----\n",
+  "client_email": "nortcromo@nortcromo.iam.gserviceaccount.com",
+  "client_id": "115109209924394916241",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/nortcromo%40nortcromo.iam.gserviceaccount.com"
+}

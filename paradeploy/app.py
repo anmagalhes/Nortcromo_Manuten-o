@@ -1,6 +1,8 @@
 from flask import Flask, render_template, jsonify, request, g
 from sqlalchemy import create_engine
 import requests
+import pygsheets
+import pandas as pd
 
 app = Flask("__main__")
 
@@ -17,6 +19,9 @@ def transformaEmDict(dados, columns):
 
 @app.route("/")
 def index():
+    gc = pygsheets.authorize(service_file=r'C:\github\Nortcromo_Manuten-o\paradeploy\nortcromo-61c5d81ddb12.json') # provide the json_file name including the .json extension
+    sh = gc.open_by_url("https://docs.google.com/spreadsheets/d/1ixlpmCjD9538lNoT8Sj0-ufA1FHWPACJmltZ-qMjaZo") #provide the url of the g-sheet.
+    print(sh)
     return render_template("index.html")
 
 @app.after_request 

@@ -9,6 +9,8 @@ sqlalchemy = "*"
 flask-sqlalchemy = "*"
 psycopg2 = "*"
 requests = "*"
+pygsheets = "*"
+pandas = "*"
 
 [dev-packages]
 
