@@ -38,10 +38,18 @@ def inserirCliente():
     sh = gc.open_by_url("https://docs.google.com/spreadsheets/d/10PZMetlcxl179TLY_YWc0UYk_Wg-T9j-nB6otPagRUg") 
     x = sh.worksheet()
     header = x.get_row(1)
-    print(header)
-    print(oQueLancar)
+    header = {k: v for v, k in enumerate(header)}
+    paraLancar = []
+    for i in range(len(header)):
+        paraLancar.append('')
+    paraLancar[header['tipo_cliente']] = oQueLancar['tipo_cliente']
+
+    print(header['tipo_cliente'])
+    print(oQueLancar['tipo_cliente'])
+    print(paraLancar)
     
-    print(chr(1 + 96))
+    # print(chr(1 + 96))
+
     return jsonify(oQueLancar=oQueLancar)
 
 @app.route("/lerClientes", methods=['POST'])
