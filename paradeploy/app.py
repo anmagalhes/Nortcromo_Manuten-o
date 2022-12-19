@@ -44,6 +44,9 @@ def inserirCliente():
         paraLancar.append('')
     for k, v in header.items():
         paraLancar[v] = oQueLancar[k]
+    x.add_rows(1)
+    
+    x.update_values('A' + str(x.rows + 1), [paraLancar])
 
     return jsonify(oQueLancar=oQueLancar)
 
@@ -70,9 +73,6 @@ def lerLinhaClientes():
     valoresAchados['id_cliente'] = valoresAchados['id_cliente']
     return jsonify(dados=valoresAchados)
     
-
-
-
 @app.route("/lerProdutos", methods=['POST'])
 def lerProdutos():
     g.cur.execute(""" SELECT
