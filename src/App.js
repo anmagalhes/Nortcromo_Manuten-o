@@ -87,7 +87,7 @@ function App() {
       .then(
         (result) => {
           console.log(result);
-          // setRender('Inicio');
+          setRender('Inicio');
         },
         (error) => {
           console.log(error);

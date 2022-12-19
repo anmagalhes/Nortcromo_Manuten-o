@@ -36,10 +36,8 @@ def before_request_callback():
 def inserirCliente():
     oQueLancar = request.json['oQueLancar']
     data_atual = date.today()
-
     oQueLancar['databr_cliente'] = data_atual.strftime("%d/%m/%Y")
     data_atual = datetime.now()
-
     oQueLancar['horario_cliente'] = data_atual.strftime("%H:%M")
 
     sh = gc.open_by_url("https://docs.google.com/spreadsheets/d/10PZMetlcxl179TLY_YWc0UYk_Wg-T9j-nB6otPagRUg") 
@@ -47,12 +45,27 @@ def inserirCliente():
     header = x.get_row(1)
     header = {k: v for v, k in enumerate(header)}
     paraLancar = []
+
     for i in range(len(header)):
         paraLancar.append('')
+
     for k, v in header.items():
         paraLancar[v] = oQueLancar[k]
-    x.add_rows(1)
-    x.update_values('A' + str(x.rows), [paraLancar])
+    
+
+    if oQueLancar['id_cliente'] == '':
+        x.add_rows(1)
+        oQueLancar['id_cliente'] = str(x.rows)
+        x.update_values('A' + str(x.rows), [paraLancar])
+    else:
+        df = pd.DataFrame(x.get_all_values())
+        new_header = df.iloc[0] 
+        df = df[1:] 
+        df.columns = new_header 
+        linhaDoCliente = df.loc[df['id_cliente'] == oQueLancar['id_cliente']].index.tolist()[0]
+        print(linhaDoCliente)
+        x.update_values('A' + str(linhaDoCliente + 1), [paraLancar])
+
     return jsonify(oQueLancar=oQueLancar)
 
 @app.route("/lerClientes", methods=['POST'])
