@@ -74,7 +74,6 @@ function App() {
   };
 
   function lancarNoBanco() {
-    console.log(dados);
     fetch(myUrl + 'inserirCliente', {
       method: 'POST',
       headers: {

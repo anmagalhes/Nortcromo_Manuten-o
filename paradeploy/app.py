@@ -4,6 +4,7 @@ import requests
 import pandas as pd
 import pygsheets
 import os
+from datetime import date, datetime
 
 app = Flask("__main__")
 
@@ -34,7 +35,13 @@ def before_request_callback():
 @app.route("/inserirCliente", methods=['POST'])
 def inserirCliente():
     oQueLancar = request.json['oQueLancar']
-    oQueLancar['qualFunc'] = 'inserirCliente'
+    data_atual = date.today()
+
+    oQueLancar['databr_cliente'] = data_atual.strftime("%d/%m/%Y")
+    data_atual = datetime.now()
+
+    oQueLancar['horario_cliente'] = data_atual.strftime("%H:%M")
+
     sh = gc.open_by_url("https://docs.google.com/spreadsheets/d/10PZMetlcxl179TLY_YWc0UYk_Wg-T9j-nB6otPagRUg") 
     x = sh.worksheet()
     header = x.get_row(1)
@@ -45,10 +52,7 @@ def inserirCliente():
     for k, v in header.items():
         paraLancar[v] = oQueLancar[k]
     x.add_rows(1)
-    print(paraLancar)
-    
-    x.update_values('A' + str(x.rows + 1), [paraLancar])
-
+    x.update_values('A' + str(x.rows), [paraLancar])
     return jsonify(oQueLancar=oQueLancar)
 
 @app.route("/lerClientes", methods=['POST'])
