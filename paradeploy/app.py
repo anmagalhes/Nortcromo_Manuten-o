@@ -45,6 +45,7 @@ def inserirCliente():
     for k, v in header.items():
         paraLancar[v] = oQueLancar[k]
     x.add_rows(1)
+    print(paraLancar)
     
     x.update_values('A' + str(x.rows + 1), [paraLancar])
 
