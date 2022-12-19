@@ -118,8 +118,11 @@ export default function DataTable(props) {
                       .then((res) => res.json())
                       .then(
                         (result) => {
+                          console.log(dados);
                           result = result.dados;
                           setDados(result);
+                          console.log(dados);
+
                           setRender('FormDeCliente');
                           setLoading(false);
                         },

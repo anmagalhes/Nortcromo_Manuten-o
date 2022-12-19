@@ -42,14 +42,8 @@ def inserirCliente():
     paraLancar = []
     for i in range(len(header)):
         paraLancar.append('')
-    print(header)    
-
-    for x in header:
-        paraLancar[header[x]] = oQueLancar[header[x]]
-
-    print(oQueLancar)
-    
-    # print(chr(1 + 96))
+    for k, v in header.items():
+        paraLancar[v] = oQueLancar[k]
 
     return jsonify(oQueLancar=oQueLancar)
 
@@ -58,6 +52,7 @@ def lerClientes():
     sh = gc.open_by_url("https://docs.google.com/spreadsheets/d/10PZMetlcxl179TLY_YWc0UYk_Wg-T9j-nB6otPagRUg") 
     x = sh.worksheet()
     y = x.get_all_values()
+    y[0][0] = 'id'
     results = transformaEmDict(y[1:len(y)], list(y[0]))
     return jsonify(dados=results)
 
@@ -70,10 +65,13 @@ def lerLinhaClientes():
     new_header = df.iloc[0] 
     df = df[1:] 
     df.columns = new_header 
-    valoresAchados = df.loc[df['id'] == oQueProcurar]
+    valoresAchados = df.loc[df['id_cliente'] == oQueProcurar]
     valoresAchados = valoresAchados.to_dict(orient='records')[0]
-    valoresAchados['id_cliente'] = valoresAchados['id']
+    valoresAchados['id_cliente'] = valoresAchados['id_cliente']
     return jsonify(dados=valoresAchados)
+    
+
+
 
 @app.route("/lerProdutos", methods=['POST'])
 def lerProdutos():
