@@ -45,17 +45,15 @@ def inserirCliente():
     header = x.get_row(1)
     header = {k: v for v, k in enumerate(header)}
     paraLancar = []
-
     for i in range(len(header)):
         paraLancar.append('')
-
+        
     for k, v in header.items():
         paraLancar[v] = oQueLancar[k]
-    
 
     if oQueLancar['id_cliente'] == '':
         x.add_rows(1)
-        oQueLancar['id_cliente'] = str(x.rows)
+        paraLancar[0] = str(x.rows)
         x.update_values('A' + str(x.rows), [paraLancar])
     else:
         df = pd.DataFrame(x.get_all_values())
