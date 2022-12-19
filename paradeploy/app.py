@@ -47,7 +47,7 @@ def inserirCliente():
     paraLancar = []
     for i in range(len(header)):
         paraLancar.append('')
-        
+
     for k, v in header.items():
         paraLancar[v] = oQueLancar[k]
 
@@ -89,71 +89,6 @@ def lerLinhaClientes():
     valoresAchados['id_cliente'] = valoresAchados['id_cliente']
     return jsonify(dados=valoresAchados)
     
-@app.route("/lerProdutos", methods=['POST'])
-def lerProdutos():
-    g.cur.execute(""" SELECT
-        id_produtos as id,
-        descricao_produtos
-    FROM produtos
-    """)
-    results = transformaEmDict(g.cur.fetchall(), list(g.cur.description))
-    return jsonify(dados=results)
-
-@app.route("/inserirProduto", methods=['POST'])
-def inserirProduto():
-    oQueLancar = request.json['oQueLancar']
-    if(oQueLancar['id_produtos'] == ''):
-        query = """
-        INSERT INTO
-            produtos
-        (
-            tipo_produtos,
-            origem_produtos,
-            descricao_produtos,
-            fornecedor_produtos,
-            estoque_minimo_produtos,
-            status_produtos
-        ) VALUES (
-            '"""+oQueLancar['tipo_produtos']+"""',
-            '"""+oQueLancar['origem_produtos']+"""',
-            '"""+oQueLancar['descricao_produtos']+"""',
-            '"""+oQueLancar['fornecedor_produtos']+"""',
-            '"""+oQueLancar['estoque_minimo_produtos']+"""',
-            '"""+oQueLancar['status_produtos']+"""'
-        )       
-        """
-    else:
-        query = """
-        UPDATE produtos
-            SET
-                tipo_produtos = '"""+oQueLancar['tipo_produtos']+"""',
-                origem_produtos = '"""+oQueLancar['origem_produtos']+"""',
-                descricao_produtos = '"""+oQueLancar['descricao_produtos']+"""',
-                fornecedor_produtos = '"""+oQueLancar['fornecedor_produtos']+"""',
-                estoque_minimo_produtos = '"""+oQueLancar['estoque_minimo_produtos']+"""',
-                status_produtos = '"""+oQueLancar['status_produtos']+"""'
-            WHERE id_produtos = """+str(oQueLancar['id_produtos'])+""" RETURNING id_produtos;"""
-
-    g.cur.execute(query)
-    g.connection.commit()
-    return jsonify(oQueLancar=oQueLancar)
-
-@app.route("/lerLinhaProdutos", methods=['POST'])
-def lerLinhaProdutos():
-    oQueProcurar = str(request.json['oQueProcurar'])
-    g.cur.execute(""" SELECT
-        id_produtos,
-        tipo_produtos,
-        origem_produtos,
-        descricao_produtos,
-        fornecedor_produtos,
-        estoque_minimo_produtos,
-        status_produtos
-    FROM produtos WHERE id_produtos = """+oQueProcurar)
-    results = transformaEmDict(g.cur.fetchall(), list(g.cur.description))
-
-    return jsonify(dados=results)
-
 @app.route("/lerServicos", methods=['POST'])
 def lerServicos():
     g.cur.execute(""" SELECT
