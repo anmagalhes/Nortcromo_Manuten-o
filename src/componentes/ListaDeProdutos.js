@@ -1,4 +1,4 @@
-import DataTable from '../multiuso/DataTable';
+import DataTable from '../multiuso/DataTable_Produtos';
 
 export default function ListaDeClientes() {
   const columns = [

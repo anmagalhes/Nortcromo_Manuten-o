@@ -1,7 +1,7 @@
 import * as React from 'react';
 import ListaDeClientes from './componentes/ListaDeClientes';
 import ListaDeProdutos from './componentes/ListaDeProdutos';
-import ListaDeServicos from './componentes/ListaDeServicos';
+// import ListaDeServicos from './componentes/ListaDeServicos';
 import FormDeCliente from './componentes/FormDeCliente';
 import FormDeProduto from './componentes/FormDeProduto';
 import FormDeServico from './componentes/FormDeServico';
@@ -136,8 +136,8 @@ function Estrutura() {
       return <ListaDeProdutos />;
     case 'FormDeProduto':
       return <FormDeProduto />;
-    case 'ListaDeServicos':
-      return <ListaDeServicos />;
+    // case 'ListaDeServicos':
+    //   return <ListaDeServicos />;
     case 'FormDeServico':
       return <FormDeServico />;
   }

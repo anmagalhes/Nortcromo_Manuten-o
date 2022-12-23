@@ -10,8 +10,8 @@ import { drawerStyle } from '../stylejs/drawer';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import BtnLateral from '../multiuso/BtnLateral';
-import MyTextField from '../multiuso/MyTextField';
+import BtnLateral from './BtnLateral';
+import MyTextField from './MyTextField';
 import Button from '@mui/material/Button';
 import SearchIcon from '@mui/icons-material/Search';
 import Box from '@mui/material/Box';
@@ -105,7 +105,6 @@ export default function DataTable(props) {
                   rowsPerPageOptions={[5]}
                   onCellClick={(e) => {
                     setLoading(true);
-
                     fetch(myUrl + 'lerLinhaClientes', {
                       method: 'POST',
                       headers: {
