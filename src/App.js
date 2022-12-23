@@ -2,9 +2,11 @@ import * as React from 'react';
 import ListaDeClientes from './componentes/ListaDeClientes';
 import ListaDeProdutos from './componentes/ListaDeProdutos';
 import ListaDeComponentes from './componentes/ListaDeComponentes';
+import ListaDeOperacao from './componentes/ListaDeOperacao';
 import FormDeCliente from './componentes/FormDeCliente';
 import FormDeProduto from './componentes/FormDeProduto';
 import FormDeComponente from './componentes/FormDeComponente';
+import FormDeOperacao from './componentes/FormDeOperacao';
 import Inicio from './componentes/Inicio';
 import Context from './multiuso/Context';
 import { useState, useEffect, useContext } from 'react';
@@ -79,6 +81,12 @@ function App() {
     Imagem3_componentes: '',
     Imagem4_componentes: '',
     Status_componentes: '',
+    // Operação
+    id_operacao: '',
+    Grupo_Processo_operacao: '',
+    Descricao_Processo_operacao: '',
+    Tipo_operacao: '',
+    Nome_Processo_operacao: '',
   };
   const [dados, setDados] = useState(initialState);
   const handleChange = (event) => {
@@ -162,12 +170,16 @@ function Estrutura() {
       return <ListaDeProdutos />;
     case 'ListaDeComponentes':
       return <ListaDeComponentes />;
+    case 'ListaDeOperacao':
+      return <ListaDeOperacao />;
     case 'FormDeCliente':
       return <FormDeCliente />;
     case 'FormDeProduto':
       return <FormDeProduto />;
     case 'FormDeComponente':
       return <FormDeComponente />;
+    case 'FormDeOperacao':
+      return <FormDeOperacao />;
   }
 }
 

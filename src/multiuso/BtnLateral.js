@@ -53,6 +53,15 @@ export default function BtnLateral() {
             Componentes
           </ListItemButton>
         </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton
+            onClick={() => {
+              setRender('ListaDeOperacao');
+            }}
+          >
+            Operacao
+          </ListItemButton>
+        </ListItem>
       </List>
     </Box>
   );

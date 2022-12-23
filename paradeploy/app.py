@@ -12,6 +12,8 @@ gc = pygsheets.authorize(service_file=os.getcwd() + '/nortcromo-61c5d81ddb12.jso
 
 urlDosComponentes = "https://docs.google.com/spreadsheets/d/1L-G3AkFpFHMgPt71dsGgPFET7AYEWmy7_7N-INifVIY"
 
+urlOperacao = "https://docs.google.com/spreadsheets/d/1snnF28wSSQW_86MkVafE-7gOEKXuEX1Kz3f0rpnXRHo/"
+
 def transformaEmDict(dados, columns):
     results = []
     for row in dados:
@@ -200,6 +202,63 @@ def inserirComponente():
         df = df[1:] 
         df.columns = new_header 
         linhaDoCliente = df.loc[df['Id_componentes'] == oQueLancar['Id_componentes']].index.tolist()[0]
+        print(linhaDoCliente)
+        x.update_values('A' + str(linhaDoCliente + 1), [paraLancar])
+
+    return jsonify(oQueLancar=oQueLancar)
+
+@app.route("/lerOperacoes", methods=['POST'])
+def lerOperacoes():
+    sh = gc.open_by_url(urlOperacao) 
+    x = sh.worksheet()
+    y = x.get_all_values()
+    y[0][0] = 'id'
+    results = transformaEmDict(y[1:len(y)], list(y[0]))
+    return jsonify(dados=results)
+
+@app.route("/lerLinhaOperacao", methods=['POST'])
+def lerLinhaOperacao():
+    oQueProcurar = str(request.json['oQueProcurar'])
+    sh = gc.open_by_url(urlOperacao) 
+    x = sh.worksheet()
+    df = pd.DataFrame(x)
+    new_header = df.iloc[0] 
+    df = df[1:] 
+    df.columns = new_header 
+    valoresAchados = df.loc[df['id_operacao'] == oQueProcurar]
+    valoresAchados = valoresAchados.to_dict(orient='records')[0]
+    valoresAchados['id_operacao'] = valoresAchados['id_operacao']
+    return jsonify(dados=valoresAchados)
+
+@app.route("/inserirOperacao", methods=['POST'])
+def inserirOperacao():
+    oQueLancar = request.json['oQueLancar']
+    data_atual = date.today()
+    # oQueLancar['Data_Cadastro_Produto'] = data_atual.strftime("%d/%m/%Y")
+    # data_atual = datetime.now()
+    # oQueLancar['horario_cliente'] = data_atual.strftime("%H:%M")
+
+    sh = gc.open_by_url(urlOperacao) 
+    x = sh.worksheet()
+    header = x.get_row(1)
+    header = {k: v for v, k in enumerate(header)}
+    paraLancar = []
+    for i in range(len(header)):
+        paraLancar.append('')
+
+    for k, v in header.items():
+        paraLancar[v] = oQueLancar[k]
+
+    if oQueLancar['id_operacao'] == '':
+        x.add_rows(1)
+        paraLancar[0] = str(x.rows)
+        x.update_values('A' + str(x.rows), [paraLancar])
+    else:
+        df = pd.DataFrame(x.get_all_values())
+        new_header = df.iloc[0] 
+        df = df[1:] 
+        df.columns = new_header 
+        linhaDoCliente = df.loc[df['id_operacao'] == oQueLancar['id_operacao']].index.tolist()[0]
         print(linhaDoCliente)
         x.update_values('A' + str(linhaDoCliente + 1), [paraLancar])
 
