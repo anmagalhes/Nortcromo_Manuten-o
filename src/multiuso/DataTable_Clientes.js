@@ -40,7 +40,7 @@ export default function DataTable(props) {
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(myUrl + 'lerClientes', {
+    fetch(myUrl + props.dados, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -105,7 +105,7 @@ export default function DataTable(props) {
                   rowsPerPageOptions={[5]}
                   onCellClick={(e) => {
                     setLoading(true);
-                    fetch(myUrl + 'lerLinhaClientes', {
+                    fetch(myUrl + props.lerlinha, {
                       method: 'POST',
                       headers: {
                         'Content-Type': 'application/json',
@@ -117,12 +117,10 @@ export default function DataTable(props) {
                       .then((res) => res.json())
                       .then(
                         (result) => {
-                          console.log(dados);
                           result = result.dados;
                           setDados(result);
-                          console.log(dados);
 
-                          setRender('FormDeCliente');
+                          setRender(props.renderAposClick);
                           setLoading(false);
                         },
                         (error) => {

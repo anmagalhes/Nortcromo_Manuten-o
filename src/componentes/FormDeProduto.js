@@ -10,6 +10,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import FormControl from '@mui/material/FormControl';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
@@ -17,7 +18,7 @@ import { useState, useEffect, useContext } from 'react';
 import Context from '../multiuso/Context';
 import { drawerStyle } from '../stylejs/drawer';
 
-export default function FormDoProduto(props) {
+export default function FormDeCliente(props) {
   const [
     dados,
     setDados,
@@ -32,7 +33,7 @@ export default function FormDoProduto(props) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <MyAppBar />
+      <MyAppBar setRender={props.setRender} />
       <Drawer variant='permanent' sx={drawerStyle}>
         <Toolbar />
         <BtnLateral />
@@ -40,68 +41,95 @@ export default function FormDoProduto(props) {
       <Box component='main' sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
         <Typography variant='h6' sx={{ mb: 1 }} noWrap component='div'>
-          Cadastro de Produto
+          Cadastro de Produtos
         </Typography>
         <Paper elevation={3} sx={{ mb: 1, p: 1 }}>
           <Grid container spacing={2}>
             <MyTextField
               xs={2}
-              name='id_produtos'
-              value={dados.id_produtos}
-              label={'id_produtos'}
+              name='id_produto'
+              value={dados.id_produto}
+              label={'id_produto'}
               disabled={true}
             />
-            {/* <Grid item xs={10}></Grid> */}
-            <Grid item xs={2}>
-              <FormControl fullWidth>
-                <InputLabel>Tipo do Produto</InputLabel>
-                <Select
-                  label='Tipo do Produto'
-                  name='tipo_produtos'
-                  value={dados.tipo_produtos}
-                  onChange={handleChange}
-                >
-                  <MenuItem value={'Peça'}>Peça</MenuItem>
-                  <MenuItem value={'Produto'}>Produto</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
+            <Grid item xs={10}></Grid>
             <MyTextField
-              xs={8}
-              name='origem_produtos'
-              value={dados.origem_produtos}
-              label={'Origem do Produto'}
+              xs={6}
+              name='Desc_Produto'
+              value={dados.Desc_Produto}
+              label={'Desc_Produto'}
             />
             <MyTextField
-              xs={12}
-              name='descricao_produtos'
-              value={dados.descricao_produtos}
-              label={'Descrição'}
+              xs={6}
+              name='Fornec_Produto'
+              value={dados.Fornec_Produto}
+              label={'Fornec_Produto'}
             />
             <MyTextField
-              xs={4}
-              name='fornecedor_produtos'
-              value={dados.fornecedor_produtos}
-              label={'Fornecedor'}
+              xs={6}
+              name='Estomin_Produto'
+              value={dados.Estomin_Produto}
+              label={'Estomin_Produto'}
             />
             <MyTextField
-              xs={4}
-              name='estoque_minimo_produtos'
-              value={dados.estoque_minimo_produtos}
-              label={'Estoque Mínimo'}
+              xs={6}
+              name='Und_Medida_Produto'
+              value={dados.Und_Medida_Produto}
+              label={'Und_Medida_Produto'}
             />
             <MyTextField
-              xs={4}
-              name='status_produtos'
-              value={dados.status_produtos}
-              label={'Status do Produto'}
+              xs={6}
+              name='Valor_Unid_Produto'
+              value={dados.Valor_Unid_Produto}
+              label={'Valor_Unid_Produto'}
             />
-
+            <MyTextField
+              xs={6}
+              name='Controle_Produto'
+              value={dados.Controle_Produto}
+              label={'Controle_Produto'}
+            />
+            <MyTextField
+              xs={6}
+              name='Status_Produto'
+              value={dados.Status_Produto}
+              label={'Status_Produto'}
+            />
+            <MyTextField
+              xs={6}
+              name='Tipo_Produto'
+              value={dados.Tipo_Produto}
+              label={'Tipo_Produto'}
+            />
+            <MyTextField
+              xs={6}
+              name='Origem_Produto'
+              value={dados.Origem_Produto}
+              label={'Origem_Produto'}
+            />
+            <MyTextField
+              xs={6}
+              name='Foto_Produto'
+              value={dados.Foto_Produto}
+              label={'Foto_Produto'}
+            />
+            <MyTextField
+              xs={6}
+              name='Data_Cadastro_Produto'
+              value={dados.Data_Cadastro_Produto}
+              label={'Data_Cadastro_Produto'}
+            />
+            <MyTextField
+              xs={6}
+              name='Usuario_Cad_Produto'
+              value={dados.Usuario_Cad_Produto}
+              label={'Usuario_Cad_Produto'}
+            />
             <Grid item xs={2}>
               <Button
                 variant='outlined'
                 onClick={() => {
-                  setRender('ListaDeProdutos');
+                  setRender('ListaDeClientes');
                 }}
               >
                 Voltar

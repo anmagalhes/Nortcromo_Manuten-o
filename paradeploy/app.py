@@ -10,6 +10,8 @@ app = Flask("__main__")
 
 gc = pygsheets.authorize(service_file=os.getcwd() + '/nortcromo-61c5d81ddb12.json') 
 
+urlDosComponentes = "https://docs.google.com/spreadsheets/d/1L-G3AkFpFHMgPt71dsGgPFET7AYEWmy7_7N-INifVIY"
+
 def transformaEmDict(dados, columns):
     results = []
     for row in dados:
@@ -88,62 +90,121 @@ def lerLinhaClientes():
     valoresAchados = valoresAchados.to_dict(orient='records')[0]
     valoresAchados['id_cliente'] = valoresAchados['id_cliente']
     return jsonify(dados=valoresAchados)
-    
-@app.route("/lerServicos", methods=['POST'])
-def lerServicos():
-    g.cur.execute(""" SELECT
-        id_servicos as id,
-        sigla_servicos
-    FROM servicos
-    """)
-    results = transformaEmDict(g.cur.fetchall(), list(g.cur.description))
+
+@app.route("/lerProdutos", methods=['POST'])
+def lerProdutos():
+    sh = gc.open_by_url("https://docs.google.com/spreadsheets/d/1lg3dsCwVH_3e0k5Dsoo0VTVscRMOQWH0L8ZLif4gEWU/") 
+    x = sh.worksheet()
+    y = x.get_all_values()
+    y[0][0] = 'id'
+    results = transformaEmDict(y[1:len(y)], list(y[0]))
     return jsonify(dados=results)
 
-@app.route("/inserirServico", methods=['POST'])
-def inserirServico():
-    oQueLancar = request.json['oQueLancar']
-    if(oQueLancar['id_servicos'] == ''):
-        query = """
-        INSERT INTO
-            servicos
-        (
-            grupo_servicos,
-            sigla_servicos,
-            material_servicos,
-            tempo_servicos
-        ) VALUES (
-            '"""+oQueLancar['grupo_servicos']+"""',
-            '"""+oQueLancar['sigla_servicos']+"""',
-            '"""+oQueLancar['material_servicos']+"""',
-            '"""+oQueLancar['tempo_servicos']+"""'
-        )       
-        """
-    else:
-        query = """
-        UPDATE servicos
-            SET
-                grupo_servicos = '"""+oQueLancar['grupo_servicos']+"""',
-                sigla_servicos = '"""+oQueLancar['sigla_servicos']+"""',
-                material_servicos = '"""+oQueLancar['material_servicos']+"""',
-                tempo_servicos = '"""+oQueLancar['tempo_servicos']+"""'
-            WHERE id_servicos = """+str(oQueLancar['id_servicos'])+""" RETURNING id_servicos;"""
+@app.route("/lerLinhaProdutos", methods=['POST'])
+def lerLinhaProdutos():
+    oQueProcurar = str(request.json['oQueProcurar'])
+    sh = gc.open_by_url("https://docs.google.com/spreadsheets/d/1lg3dsCwVH_3e0k5Dsoo0VTVscRMOQWH0L8ZLif4gEWU/") 
+    x = sh.worksheet()
+    df = pd.DataFrame(x)
+    new_header = df.iloc[0] 
+    df = df[1:] 
+    df.columns = new_header 
+    valoresAchados = df.loc[df['id_produto'] == oQueProcurar]
+    valoresAchados = valoresAchados.to_dict(orient='records')[0]
+    valoresAchados['id_produto'] = valoresAchados['id_produto']
+    return jsonify(dados=valoresAchados)
 
-    g.cur.execute(query)
-    g.connection.commit()
+@app.route("/inserirProduto", methods=['POST'])
+def inserirProduto():
+    oQueLancar = request.json['oQueLancar']
+    data_atual = date.today()
+    oQueLancar['Data_Cadastro_Produto'] = data_atual.strftime("%d/%m/%Y")
+    data_atual = datetime.now()
+    # oQueLancar['horario_cliente'] = data_atual.strftime("%H:%M")
+
+    sh = gc.open_by_url("https://docs.google.com/spreadsheets/d/1lg3dsCwVH_3e0k5Dsoo0VTVscRMOQWH0L8ZLif4gEWU/") 
+    x = sh.worksheet()
+    header = x.get_row(1)
+    header = {k: v for v, k in enumerate(header)}
+    paraLancar = []
+    for i in range(len(header)):
+        paraLancar.append('')
+
+    for k, v in header.items():
+        paraLancar[v] = oQueLancar[k]
+
+    if oQueLancar['id_produto'] == '':
+        x.add_rows(1)
+        paraLancar[0] = str(x.rows)
+        x.update_values('A' + str(x.rows), [paraLancar])
+    else:
+        df = pd.DataFrame(x.get_all_values())
+        new_header = df.iloc[0] 
+        df = df[1:] 
+        df.columns = new_header 
+        linhaDoCliente = df.loc[df['id_produto'] == oQueLancar['id_produto']].index.tolist()[0]
+        print(linhaDoCliente)
+        x.update_values('A' + str(linhaDoCliente + 1), [paraLancar])
+
     return jsonify(oQueLancar=oQueLancar)
 
-@app.route("/lerLinhaServicos", methods=['POST'])
-def lerLinhaServicos():
-    oQueProcurar = str(request.json['oQueProcurar'])
-    g.cur.execute(""" SELECT
-        id_servicos,
-        grupo_servicos,
-        sigla_servicos,
-        material_servicos,
-        tempo_servicos
-    FROM servicos WHERE id_servicos = """+oQueProcurar)
-    results = transformaEmDict(g.cur.fetchall(), list(g.cur.description))
-
+@app.route("/lerComponentes", methods=['POST'])
+def lerComponentes():
+    sh = gc.open_by_url(urlDosComponentes) 
+    x = sh.worksheet()
+    y = x.get_all_values()
+    y[0][0] = 'id'
+    results = transformaEmDict(y[1:len(y)], list(y[0]))
     return jsonify(dados=results)
+
+@app.route("/lerLinhaComponente", methods=['POST'])
+def lerLinhaComponente():
+    oQueProcurar = str(request.json['oQueProcurar'])
+    sh = gc.open_by_url(urlDosComponentes) 
+    x = sh.worksheet()
+    df = pd.DataFrame(x)
+    new_header = df.iloc[0] 
+    df = df[1:] 
+    df.columns = new_header 
+    valoresAchados = df.loc[df['Id_componentes'] == oQueProcurar]
+    valoresAchados = valoresAchados.to_dict(orient='records')[0]
+    valoresAchados['Id_componentes'] = valoresAchados['Id_componentes']
+    return jsonify(dados=valoresAchados)
+
+@app.route("/inserirComponente", methods=['POST'])
+def inserirComponente():
+    oQueLancar = request.json['oQueLancar']
+    data_atual = date.today()
+    oQueLancar['Data_Cadastro_Produto'] = data_atual.strftime("%d/%m/%Y")
+    data_atual = datetime.now()
+    # oQueLancar['horario_cliente'] = data_atual.strftime("%H:%M")
+
+    sh = gc.open_by_url(urlDosComponentes) 
+    x = sh.worksheet()
+    header = x.get_row(1)
+    header = {k: v for v, k in enumerate(header)}
+    paraLancar = []
+    for i in range(len(header)):
+        paraLancar.append('')
+
+    for k, v in header.items():
+        paraLancar[v] = oQueLancar[k]
+
+    if oQueLancar['Id_componentes'] == '':
+        x.add_rows(1)
+        paraLancar[0] = str(x.rows)
+        x.update_values('A' + str(x.rows), [paraLancar])
+    else:
+        df = pd.DataFrame(x.get_all_values())
+        new_header = df.iloc[0] 
+        df = df[1:] 
+        df.columns = new_header 
+        linhaDoCliente = df.loc[df['Id_componentes'] == oQueLancar['Id_componentes']].index.tolist()[0]
+        print(linhaDoCliente)
+        x.update_values('A' + str(linhaDoCliente + 1), [paraLancar])
+
+    return jsonify(oQueLancar=oQueLancar)
+
+
 
 # app.run()

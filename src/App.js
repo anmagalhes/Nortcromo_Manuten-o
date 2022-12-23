@@ -1,10 +1,10 @@
 import * as React from 'react';
 import ListaDeClientes from './componentes/ListaDeClientes';
 import ListaDeProdutos from './componentes/ListaDeProdutos';
-// import ListaDeServicos from './componentes/ListaDeServicos';
+import ListaDeComponentes from './componentes/ListaDeComponentes';
 import FormDeCliente from './componentes/FormDeCliente';
 import FormDeProduto from './componentes/FormDeProduto';
-import FormDeServico from './componentes/FormDeServico';
+import FormDeComponente from './componentes/FormDeComponente';
 import Inicio from './componentes/Inicio';
 import Context from './multiuso/Context';
 import { useState, useEffect, useContext } from 'react';
@@ -37,19 +37,48 @@ function App() {
     uf_cliente: '',
     complemento_cliente: '',
     // produtos
-    id_produtos: '',
-    tipo_produtos: '',
-    origem_produtos: '',
-    descricao_produtos: '',
-    fornecedor_produtos: '',
-    estoque_minimo_produtos: '',
-    status_produtos: '',
+    id_produto: '',
+    Desc_Produto: '',
+    Fornec_Produto: '',
+    Estomin_Produto: '',
+    Und_Medida_Produto: '',
+    Valor_Unid_Produto: '',
+    Controle_Produto: '',
+    Status_Produto: '',
+    Tipo_Produto: '',
+    Origem_Produto: '',
+    Foto_Produto: '',
+    Data_Cadastro_Produto: '',
+    Usuario_Cad_Produto: '',
     // servicos
     id_servicos: '',
     grupo_servicos: '',
     sigla_servicos: '',
     material_servicos: '',
     tempo_servicos: '',
+    // Componentes
+    Id_componentes: '',
+    descricao_componentes: '',
+    Quantidade_componentes: '',
+    DiamentroInterno_componentes: '',
+    DiamentroExterno_componentes: '',
+    Espessura_componentes: '',
+    Altura_componentes: '',
+    Material_componentes: '',
+    Alojagaxeta_componentes: '',
+    Comprimento_componentes: '',
+    Intalojgaxeta_componentes: '',
+    Largologaxeta_componentes: '',
+    DataInicio_componentes: '',
+    HoraInicial_componentes: '',
+    DataFinal_componentes: '',
+    HoraFinal_componentes: '',
+    Responsavel_componentes: '',
+    Imagem1_componentes: '',
+    Imagem2_componentes: '',
+    Imagem3_componentes: '',
+    Imagem4_componentes: '',
+    Status_componentes: '',
   };
   const [dados, setDados] = useState(initialState);
   const handleChange = (event) => {
@@ -73,8 +102,8 @@ function App() {
     });
   };
 
-  function lancarNoBanco() {
-    fetch(myUrl + 'inserirCliente', {
+  function lancarNoBanco(opt) {
+    fetch(myUrl + opt, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -86,7 +115,6 @@ function App() {
       .then((res) => res.json())
       .then(
         (result) => {
-          console.log(result);
           setRender('Inicio');
         },
         (error) => {
@@ -130,16 +158,16 @@ function Estrutura() {
       return <Inicio />;
     case 'ListaDeClientes':
       return <ListaDeClientes />;
-    case 'FormDeCliente':
-      return <FormDeCliente />;
     case 'ListaDeProdutos':
       return <ListaDeProdutos />;
+    case 'ListaDeComponentes':
+      return <ListaDeComponentes />;
+    case 'FormDeCliente':
+      return <FormDeCliente />;
     case 'FormDeProduto':
       return <FormDeProduto />;
-    // case 'ListaDeServicos':
-    //   return <ListaDeServicos />;
-    case 'FormDeServico':
-      return <FormDeServico />;
+    case 'FormDeComponente':
+      return <FormDeComponente />;
   }
 }
 

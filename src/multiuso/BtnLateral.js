@@ -31,7 +31,8 @@ export default function BtnLateral() {
               setRender('ListaDeClientes');
             }}
           >
-            <BadgeOutlinedIcon /> Clientes
+            Clientes
+            {/* <BadgeOutlinedIcon /> Clientes */}
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
@@ -40,16 +41,16 @@ export default function BtnLateral() {
               setRender('ListaDeProdutos');
             }}
           >
-            <ShoppingCartOutlinedIcon /> Lista De Produtos
+            Produtos
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton
             onClick={() => {
-              setRender('ListaDeServicos');
+              setRender('ListaDeComponentes');
             }}
           >
-            <PlumbingOutlinedIcon /> Lista de Serviços
+            Componentes
           </ListItemButton>
         </ListItem>
       </List>
